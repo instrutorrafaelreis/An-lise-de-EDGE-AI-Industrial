@@ -1,0 +1,24 @@
+{
+  "hardware": "CPU Local (Zero GPU)",
+  "generalista_fp32": {
+    "classes": 1000,
+    "parametros": 2542856,
+    "tamanho_mb": 9.83,
+    "latencia_ms": 22.16,
+    "fps": 45.1
+  },
+  "especialista_int8": {
+    "classes": 2,
+    "parametros": 11354,
+    "tamanho_mb": 0.02,
+    "latencia_ms": 3.15,
+    "latencia_p95_ms": 4.89,
+    "fps": 317.7,
+    "acuracia_pct": 100.0
+  },
+  "ganhos": {
+    "reducao_parametros_pct": 99.6,
+    "reducao_tamanho_pct": 99.8,
+    "aceleracao_fps_x": 7.04
+  }
+}
