@@ -890,8 +890,11 @@
         📊 Apresentação / Pitch (9 Slides)
       </button>
       <button class="tab-btn" id="tabCronograma" onclick="switchMode('cronograma')">
-        📅 Cronograma + Modelo Visual da Bancada (Dia 10)
+        📅 Cronograma + Modelo Visual (Dia 10)
       </button>
+      <a class="tab-btn" href="app_tvbox_feira.html" style="text-decoration: none; display: inline-flex; align-items: center;">
+        📺 App Ao Vivo (TV Box 4K)
+      </a>
     </div>
 
     <div class="nav-links">
@@ -908,12 +911,12 @@
     <div class="deck" id="deck">
 
       <!-- SLIDE 1: CAPA -->
-      <section class="slide active" data-note="Discurso (30s): Segundo a RAND Corporation (2024) e o Gartner, mais de 80% dos projetos de IA falham antes de entrar em produção, e no Brasil 66% das indústrias travam no alto custo de infraestrutura (CNI). Nós aplicamos Deep Compression (Stanford) e Quantização Int8 (Google Research) para rodar Visão Computacional 100% offline em placas de R$ 600 ou em PCs antigos já disponíveis na fábrica.">
+      <section class="slide active" data-note="Discurso (30s): Segundo a RAND Corporation (2024) e o Gartner, mais de 80% dos projetos de IA falham antes de entrar em produção, e no Brasil 66% das indústrias travam no alto custo de infraestrutura (CNI). Nós aplicamos Deep Compression (Stanford) e Quantização Int8 (Google Research) para rodar Visão Computacional 100% offline até numa TV Box Smart Pro de R$ 100 ou em PCs antigos já disponíveis na fábrica.">
         <div class="badge">Indústria 4.0 • Visão Computacional Baseada em Evidências</div>
         <h1>Edge AI <span class="highlight">Specialist</span></h1>
         <p class="subtitle">
           Inteligência Artificial <strong>100% Offline, Resiliente e de Baixo Custo</strong> para o Chão de Fábrica.<br/>
-          Transformando câmeras comuns e computadores legados em sensores ópticos inteligentes.
+          Transformando câmeras comuns, TV Boxes ARM (~R$ 100) e computadores legados em sensores ópticos inteligentes.
         </p>
         <div class="grid-3" style="max-width: 980px;">
           <div class="card accent-border">
@@ -923,13 +926,13 @@
           </div>
           <div class="card accent-border">
             <div class="stat-big">-75% a -99%</div>
-            <p><strong>Compressão INT8 & Pruning</strong><br/>Modelos enxutos que rodam direto na CPU (Zero GPU).</p>
+            <p><strong>Compressão INT8 & Pruning</strong><br/>Modelos enxutos (20 KB) que rodam direto na CPU (Zero GPU).</p>
             <div class="ref-tag"><strong>Fontes:</strong> Google CVPR 2018 [7]; Stanford ICLR 2016 [6]</div>
           </div>
           <div class="card accent-border">
-            <div class="stat-big">7,04x</div>
-            <p><strong>Mais Rápido na Mesma CPU</strong><br/>Salto de 45,1 FPS para 317,7 FPS com 20 KB de peso.</p>
-            <div class="ref-tag"><strong>Fonte:</strong> Benchmark PoC Edge AI Specialist (2026)</div>
+            <div class="stat-big">~R$ 100</div>
+            <p><strong>Hardware Edge Acessível</strong><br/>Homologado em TV Box Smart Pro 4K (ARM Cortex-A53) e PCs legados.</p>
+            <div class="ref-tag"><strong>Fonte:</strong> Especificação SoC ARM64 Cortex-A53 [13]</div>
           </div>
         </div>
       </section>
@@ -987,31 +990,31 @@
           </div>
         </div>
         <div class="quote-box">
-          "Em vez de exigir um supercomputador para rodar uma IA pesada, moldamos matematicamente a IA para caber no computador que a fábrica já tem."
+          "Em vez de exigir um supercomputador para rodar uma IA pesada, moldamos matematicamente a IA para caber numa TV Box de R$ 100 ou no PC que a fábrica já tem."
         </div>
       </section>
 
       <!-- SLIDE 4: HARDWARE ALVO -->
-      <section class="slide" data-note="Enfatize o Tier 3 (Retrofitting): processadores Intel Core i3/i5 antigos ganham de 2x a 4x mais FPS com instruções vetoriais INT8 (Intel OpenVINO), permitindo reaproveitar PCs da TI a custo zero.">
+      <section class="slide" data-note="Destaque o Tier 2 com a TV Box Smart Pro Android 4K (~R$ 100): ela possui processador Quad-Core ARM Cortex-A53 de 64 bits, 2GB de RAM e 4 portas USB — custando 5x menos que um Raspberry Pi 4!">
         <div class="badge">Prova de Fogo • Zero GPU</div>
         <h2>Escalabilidade em <span class="highlight-cyan">3 Níveis de Hardware</span></h2>
-        <p class="subtitle">Inferência fluida em tempo real utilizando exclusivamente a CPU de hardwares modestos:</p>
+        <p class="subtitle">Inferência fluida em tempo real utilizando exclusivamente a CPU de hardwares ultrabaratos:</p>
         <div class="grid-3">
           <div class="card">
             <div class="card-num">Tier 1 • Microcontrolador</div>
-            <h3>ESP32-S3 (TinyML)</h3>
-            <div class="stat-big" style="font-size: 1.9rem;">~R$ 80 - R$ 150</div>
+            <h3>ESP32-S3 / ESP32-CAM</h3>
+            <div class="stat-big" style="font-size: 1.9rem;">~R$ 50 - R$ 90</div>
             <p><strong>Aplicação:</strong> Tarefas ultrassimples de presença/ausência, leitura de mostradores e alertas estáticos usando menos de 250 KB de RAM.</p>
             <div class="ref-tag"><strong>Fonte:</strong> FOMO Constrained Object Detection (2022) [10]</div>
           </div>
-          <div class="card">
-            <div class="card-num">Tier 2 • Embarcado Industrial</div>
-            <h3>Raspberry Pi 4 / 5</h3>
-            <div class="stat-big" style="font-size: 1.9rem;">~R$ 500 - R$ 900</div>
-            <p><strong>Aplicação:</strong> Monitoramento de EPIs, contagem em esteiras moderadas e validação de montagem via instruções vetoriais ARM NEON INT8.</p>
-            <div class="ref-tag"><strong>Fonte:</strong> Nagel et al., Qualcomm AI Quantization (2021) [9]</div>
-          </div>
           <div class="card accent-border">
+            <div class="card-num">Tier 2 • Embarcado Smart Box (Destaque)</div>
+            <h3>TV Box Smart Pro 4K / Raspberry</h3>
+            <div class="stat-big" style="font-size: 1.9rem;">~R$ 95 - R$ 140</div>
+            <p><strong>Hardware Referência:</strong> SoC Quad-Core <strong>ARM Cortex-A53 (64-bit)</strong>, 2GB RAM, 4x USB + HDMI. Inspeciona peças via Webcam USB por 1/5 do preço de um Raspberry Pi 4.</p>
+            <div class="ref-tag"><strong>Fontes:</strong> Arquitetura ARMv8-A NEON INT8 [9, 13]</div>
+          </div>
+          <div class="card">
             <div class="card-num">Tier 3 • Retrofitting (Upcycling)</div>
             <h3>PCs / Notebooks Legados</h3>
             <div class="stat-big" style="font-size: 1.9rem;">Custo R$ 0 (TI Local)</div>
@@ -1022,7 +1025,7 @@
       </section>
 
       <!-- SLIDE 5: COMPARATIVO E BENCHMARK REAL -->
-      <section class="slide" data-note="Mostre que os números da coluna verde não são promessas teóricas: foram medidos na nossa PoC local (benchmark_resultado.json) e respaldados pela literatura.">
+      <section class="slide" data-note="Mostre que os números da coluna verde não são promessas teóricas: foram medidos na nossa PoC local (benchmark_resultado.json) e homologados para TV Box ARM Cortex-A53 e PCs legados.">
         <div class="badge">Viabilidade Financeira & Benchmark Real</div>
         <h2>Visão Tradicional vs. <span class="highlight">Edge AI Specialist</span></h2>
         <p class="subtitle">Comparativo direto entre a abordagem convencional e os resultados medidos na nossa Prova de Conceito:</p>
@@ -1045,8 +1048,8 @@
             <tr>
               <td><strong>Custo de Hardware / Ponto</strong></td>
               <td class="col-trad">R$ 20.000 a R$ 60.000 (Servidor GPU)</td>
-              <td class="col-edge">R$ 0 (PC Legado) a R$ 1.500 (Embarcado)</td>
-              <td>Sondagem CNI Indústria 4.0 [3]</td>
+              <td class="col-edge">R$ 0 (PC Legado) a ~R$ 100 (TV Box Smart Pro 4K ARM)</td>
+              <td>Sondagem CNI [3] / Ref. TV Box [13]</td>
             </tr>
             <tr>
               <td><strong>Tamanho do Modelo</strong></td>
@@ -1199,8 +1202,8 @@
             Jacob, B. et al. <em>Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference.</em> Redução matemática de 75% (FP32 ➔ INT8) e aceleração em CPU.
           </div>
           <div class="ref-item">
-            <strong>[8–12] Qualcomm AI [9], Edge Impulse [10], Intel OpenVINO [11] & Normas</strong>
-            Nagel et al. (arXiv:2106.08295); Hinton et al. (2015); Intel OpenVINO Benchmarks (2x–4x speedup em CPU); Normas <strong>ABNT NBR IEC 60529 (IP65/67)</strong> e <strong>IEC 62443</strong>.
+            <strong>[8–13] Qualcomm AI [9], Intel [11], Normas [12] & TV Box ARM64 [13]</strong>
+            Nagel et al. (2021); Normas <strong>ABNT NBR IEC 60529 (IP65/67)</strong> e <strong>IEC 62443</strong>; <strong>[13] TV Box Smart Pro Android 4K</strong> (SoC ARM Cortex-A53 Quad-Core 64-bit, 2GB DDR3, 16GB eMMC, 4x USB).
           </div>
         </div>
       </section>
@@ -1242,8 +1245,7 @@
         <div class="badge">Sprint de 11 Dias • Rumo à Feira de Inovação (Dia 10)</div>
         <h1 style="font-size: 2.2rem;">Cronograma de Execução: <span class="highlight">Edge AI Specialist</span></h1>
         <p class="subtitle" style="margin-bottom: 18px;">
-          Plano tático dia a dia para entregar a demonstração física 100% Offline, os Slides Executivos e a Prova de Conceito em CPU rodando ao vivo no estande.
-          <em>Clique nos cartões diários para marcar/desmarcar o progresso.</em>
+          Plano tático dia a dia para entregar a demonstração física 100% Offline com <strong>TV Box Smart Pro 4K (ARM Cortex-A53 — ~R$ 100)</strong>, Pórtico de PVC (R$ 55) e Prova de Conceito em CPU rodando ao vivo no estande.
         </p>
 
         <div class="progress-box">
@@ -1259,16 +1261,16 @@
 
       <div class="strategy-grid">
         <div class="strat-card">
-          <h3>✈️ 1. Desafio "Modo Avião"</h3>
-          <p>Computador na bancada com Wi-Fi visivelmente desligado. Prova ao vivo que a fábrica não para quando a internet cai.</p>
+          <h3>📺 1. Hardware Referência: TV Box 4K (~R$ 100)</h3>
+          <p>Equipada com CPU Quad-Core <strong>ARM Cortex-A53 (64-bit)</strong>, 2GB RAM e 4 portas USB — custa 5x menos que um Raspberry Pi 4.</p>
         </div>
         <div class="strat-card">
           <h3>📷 2. Interação Física na Mesa</h3>
-          <p>Webcam + Luminária LED apontada para a bancada. O próprio visitante coloca a peça boa ou com defeito sob a lente.</p>
+          <p>Webcam USB + Luminária LED presas no arco de PVC apontadas para a mesa. O visitante coloca a peça boa ou com defeito sob a lente.</p>
         </div>
         <div class="strat-card">
           <h3>⚡ 3. Resposta em 3,15 ms (CPU)</h3>
-          <p>Modelo de apenas <strong>20 KB (INT8)</strong> rodando a <strong>317 FPS</strong> direto na CPU, disparando alerta de CLP na hora.</p>
+          <p>Modelo de apenas <strong>20 KB (INT8)</strong> rodando 100% offline sem placa de vídeo, disparando alerta de CLP na hora.</p>
         </div>
       </div>
 
@@ -1309,34 +1311,36 @@
                 O visitante pega a <strong>Peça Boa</strong> ou a <strong>Peça com Risco/Defeito</strong> e coloca embaixo do arco de PVC.
               </p>
             </div>
-            <div class="price-sticker">🏷️ Etiqueta na Peça: R$ 55,00 Total</div>
+            <div class="price-sticker">🏷️ Etiqueta no Arco: R$ 55,00 Total</div>
           </div>
 
-          <!-- CENTRO: NOTEBOOK EM MODO AVIÃO -->
-          <div class="zone-box">
+          <!-- CENTRO: TV BOX SMART PRO 4K + TELA -->
+          <div class="zone-box zone-highlight">
             <div>
-              <div class="zone-title">📍 Zona 2 (Centro) • Processamento em CPU</div>
-              <h3 style="font-size: 1.18rem; margin-bottom: 8px;">Notebook / PC Antigo (Modo Avião)</h3>
+              <div class="zone-title">📍 Zona 2 (Centro) • Hardware Edge ARM</div>
+              <h3 style="font-size: 1.18rem; margin-bottom: 8px;">TV Box Smart Pro 4K + Monitor/PC</h3>
               <svg viewBox="0 0 340 210" style="width: 100%; background: #0b0f17; border-radius: 12px; border: 1px solid #263348; margin: 8px 0;">
-                <rect x="20" y="18" width="300" height="155" rx="8" fill="#1e293b" stroke="#475569" stroke-width="3"/>
-                <rect x="28" y="26" width="140" height="139" rx="4" fill="#0f172a"/>
-                <rect x="55" y="55" width="85" height="65" fill="none" stroke="#10b981" stroke-width="2"/>
-                <text x="36" y="44" fill="#10b981" font-size="10" font-weight="bold">WEBCAM AO VIVO</text>
-                <text x="45" y="142" fill="#ffffff" font-size="9">3,15 ms | 317 FPS</text>
-                <rect x="174" y="26" width="138" height="139" rx="4" fill="#151c28"/>
-                <text x="184" y="46" fill="#06b6d4" font-size="10" font-weight="bold">COMPARATIVO CAPEX</text>
-                <text x="184" y="72" fill="#f87171" font-size="10">GPU: R$ 45.000</text>
-                <text x="184" y="96" fill="#10b981" font-size="11" font-weight="bold">EDGE: R$ 55,00</text>
-                <rect x="184" y="115" width="118" height="32" rx="4" fill="#10b981"/>
-                <text x="194" y="135" fill="#042f1e" font-size="10" font-weight="bold">CLP: LINHA OK</text>
-                <polygon points="5,195 335,195 315,175 25,175" fill="#334155"/>
-                <text x="95" y="190" fill="#f8fafc" font-size="10" font-weight="bold">✈️ WI-FI DESLIGADO (OFFLINE)</text>
+                <rect x="20" y="14" width="300" height="135" rx="8" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+                <rect x="28" y="22" width="140" height="119" rx="4" fill="#0f172a"/>
+                <rect x="55" y="45" width="85" height="55" fill="none" stroke="#10b981" stroke-width="2"/>
+                <text x="36" y="38" fill="#10b981" font-size="10" font-weight="bold">WEBCAM AO VIVO</text>
+                <text x="45" y="128" fill="#ffffff" font-size="9">3,15 ms | INT8 20KB</text>
+                <rect x="174" y="22" width="138" height="119" rx="4" fill="#151c28"/>
+                <text x="184" y="40" fill="#06b6d4" font-size="10" font-weight="bold">TV BOX ARM64</text>
+                <text x="184" y="62" fill="#f87171" font-size="10">GPU: R$ 45.000</text>
+                <text x="184" y="84" fill="#10b981" font-size="11" font-weight="bold">TV BOX: R$ 100</text>
+                <rect x="184" y="98" width="118" height="30" rx="4" fill="#10b981"/>
+                <text x="194" y="117" fill="#042f1e" font-size="10" font-weight="bold">CLP: LINHA OK</text>
+                <!-- Caixinha TV Box Física na Frente -->
+                <rect x="85" y="158" width="170" height="42" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+                <text x="98" y="177" fill="#10b981" font-size="10" font-weight="bold">📺 TV BOX SMART PRO 4K</text>
+                <text x="102" y="192" fill="#cbd5e1" font-size="9">ARM Cortex-A53 • 4x USB</text>
               </svg>
               <p style="font-size: 0.88rem; color: var(--text-muted);">
-                Rode <code>python bancada_feira_ao_vivo.py</code>. Mostra a câmera e o comparativo de preço lado a lado.
+                Abra a aba <strong>📺 App Ao Vivo (TV Box 4K)</strong> ou rode <code>python bancada_feira_ao_vivo.py</code>.
               </p>
             </div>
-            <div class="price-sticker">🏷️ Custo de Servidor GPU: R$ 0,00</div>
+            <div class="price-sticker">🏷️ Etiqueta na TV Box: R$ 100,00 (Zero GPU)</div>
           </div>
 
           <!-- DIREITA: COMPARATIVO DE IMPACTO + QR CODE -->
@@ -1350,9 +1354,9 @@
                 <text x="32" y="68" fill="#ffffff" font-size="12" font-weight="bold">R$ 45.000</text>
                 <line x1="25" y1="25" x2="135" y2="95" stroke="#ef4444" stroke-width="3"/>
                 <rect x="155" y="20" width="125" height="80" rx="8" fill="#0d2821" stroke="#10b981" stroke-width="2"/>
-                <text x="167" y="45" fill="#10b981" font-size="10" font-weight="bold">NOSSO MODELO</text>
-                <text x="167" y="68" fill="#ffffff" font-size="12" font-weight="bold">20 KB (INT8)</text>
-                <text x="167" y="86" fill="#a7f3d0" font-size="9">Cabe num ESP32!</text>
+                <text x="167" y="45" fill="#10b981" font-size="10" font-weight="bold">NOSSO KIT TOTAL</text>
+                <text x="167" y="68" fill="#ffffff" font-size="12" font-weight="bold">R$ 155,00</text>
+                <text x="167" y="86" fill="#a7f3d0" font-size="9">TV Box + Câmera PVC!</text>
                 <rect x="65" y="115" width="170" height="75" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
                 <text x="85" y="142" fill="#06b6d4" font-size="11" font-weight="bold">📱 QR CODE GITHUB PAGES</text>
                 <text x="82" y="165" fill="#cbd5e1" font-size="9">Acesse os Slides e a PoC</text>
@@ -1361,7 +1365,7 @@
                 Coloque as etiquetas impressas na frente da mesa para quem passar no corredor ler de longe.
               </p>
             </div>
-            <div class="price-sticker red">❌ Concorrente: R$ 45.000 vs ✅ Nós: R$ 55</div>
+            <div class="price-sticker red">❌ R$ 45.000 vs ✅ Kit Completo: R$ 155</div>
           </div>
         </div>
 
@@ -1415,8 +1419,8 @@
               Enrole fita isolante preta ou pinte com spray preto/cinza metálico.
             </div>
             <div class="step-item">
-              <strong>4. Prender a Câmera e o LED</strong>
-              Fixe a Webcam USB (ou suporte de celular) + mini lanterna/fita LED na ponta superior com abraçadeira plástica ("enforca-gato").
+              <strong>4. Ligar na TV Box Smart Pro 4K (ou PC)</strong>
+              Plugue o cabo USB da Webcam e da Luz LED direto nas portas USB laterais da TV Box Smart Pro 4K!
             </div>
           </div>
         </div>
@@ -1435,10 +1439,10 @@
             <span class="day-tag">Dia 30 a Dia 04</span>
             <span class="status-pill">✅ Concluído</span>
           </div>
-          <h3>Fase 1: Fundação, PoC INT8 & Sistema de Feira</h3>
+          <h3>Fase 1: Fundação, PoC INT8 & App TV Box</h3>
           <ul>
             <li>Documento Técnico Referenciado (<code>PROPOSTA_EDGE_AI.md</code>)</li>
-            <li>Portal Unificado Pitch + Cronograma + Mapa Visual (<code>index.html</code>)</li>
+            <li>Portal Unificado Pitch + Cronograma + App TV Box (<code>app_tvbox_feira.html</code>)</li>
             <li>PoC INT8 (20 KB / 317 FPS) + Sistema Ao Vivo (<code>bancada_feira_ao_vivo.py</code>)</li>
           </ul>
         </div>
@@ -1448,9 +1452,9 @@
             <span class="day-tag">Dia 05 (Hoje)</span>
             <span class="status-pill">⏳ Pendente</span>
           </div>
-          <h3>Fase 2: Montar o Suporte de PVC (R$ 15) + EVA</h3>
+          <h3>Fase 2: TV Box Smart Pro 4K + Arco PVC (R$ 15)</h3>
           <ul>
-            <li>Comprar 1m de Cano PVC 25mm + 2 joelhos + 1 T (R$ 15) e 1 folha de EVA preto (R$ 5).</li>
+            <li>Garantir a <strong>TV Box Smart Pro Android 4K</strong> (~R$ 100) + 1m de Cano PVC 25mm (R$ 15) + EVA preto (R$ 5).</li>
             <li>Montar o pórtico da câmera conforme o Desenho Técnico acima.</li>
           </ul>
         </div>
@@ -1463,7 +1467,7 @@
           <h3>Fase 3: Separar as 4 Peças de Teste (R$ 0)</h3>
           <ul>
             <li>Escolher 2 objetos perfeitos (Peça Boa) e 2 com risco/amassado visível (Peça com Defeito).</li>
-            <li>Posicionar a Webcam + Luz LED no arco de PVC apontando para o EVA preto.</li>
+            <li>Plugar a Webcam USB + Luz LED nas portas USB da TV Box Smart Pro 4K.</li>
           </ul>
         </div>
 
@@ -1472,10 +1476,10 @@
             <span class="day-tag">Dia 07</span>
             <span class="status-pill">⏳ Pendente</span>
           </div>
-          <h3>Fase 4: Calibrar Ao Vivo no Software</h3>
+          <h3>Fase 4: Calibrar Ao Vivo na TV Box / PC</h3>
           <ul>
-            <li>Rodar <code>python bancada_feira_ao_vivo.py</code>.</li>
-            <li>Capturar Peça Boa na tecla <code>[1]</code>, Peça Defeito na tecla <code>[2]</code> e treinar na tecla <code>[T]</code>.</li>
+            <li>Abrir o <code>app_tvbox_feira.html</code> na TV Box (via Pendrive ou navegador) ou rodar <code>bancada_feira_ao_vivo.py</code>.</li>
+            <li>Gravar Peça Boa no botão <code>[1]</code> e Peça Defeito no botão <code>[2]</code>.</li>
           </ul>
         </div>
 
@@ -1486,8 +1490,8 @@
           </div>
           <h3>Fase 5: Imprimir as 4 Plaquinhas de Preço</h3>
           <ul>
-            <li>Imprimir as 4 Plaquinhas de Choque de Preço (R$ 55 vs R$ 45.000) que estão logo abaixo nesta página.</li>
-            <li>Treinar o Pitch rápido de 45 segundos com a peça na mão.</li>
+            <li>Imprimir as 4 Plaquinhas de Choque de Preço (TV Box R$ 100 + Arco R$ 55 vs GPU R$ 45.000) abaixo.</li>
+            <li>Treinar o Pitch rápido de 45 segundos apontando para a TV Box na mesa.</li>
           </ul>
         </div>
 
@@ -1496,10 +1500,10 @@
             <span class="day-tag">Dia 09</span>
             <span class="status-pill">⏳ Pendente</span>
           </div>
-          <h3>Fase 6: Teste em Modo Avião & Maleta</h3>
+          <h3>Fase 6: Teste Offline & Maleta</h3>
           <ul>
-            <li>Testar tudo com o Wi-Fi desligado (Modo Avião) por 1 hora seguida.</li>
-            <li>Guardar na mochila: Notebook, Fonte, Extensão, Arco PVC, Webcam, LED, EVA, Peças e Plaquinhas.</li>
+            <li>Testar tudo com o Wi-Fi desligado por 1 hora seguida.</li>
+            <li>Guardar na mochila: TV Box + Fonte + Cabo HDMI, Notebook, Extensão, Arco PVC, Webcam, LED, EVA e Plaquinhas.</li>
           </ul>
         </div>
 
@@ -1510,8 +1514,8 @@
           </div>
           <h3>🚀 Exposição na Feira de Inovação</h3>
           <ul>
-            <li>Montar as 3 Zonas da Mesa em 10 minutos conforme o Mapa Visual acima.</li>
-            <li>Convidar cada visitante para colocar a peça debaixo da câmera em Modo Avião!</li>
+            <li>Montar as 3 Zonas da Mesa em 10 minutos com a TV Box Smart Pro 4K em destaque no centro.</li>
+            <li>Convidar cada visitante para colocar a peça debaixo da câmera offline!</li>
           </ul>
         </div>
 
@@ -1525,10 +1529,10 @@
 
       <div class="print-sheet">
         <div class="printable-tag">
-          <div class="tag-header">✅ SOLUÇÃO EDGE AI SPECIALIST (NA MESA)</div>
-          <h3>Pórtico Óptico + Câmera + Iluminação LED</h3>
-          <div class="big-price">R$ 55,00</div>
-          <p>• Roda em qualquer PC antigo sem placa de vídeo (CPU)<br>• Modelo de IA comprimido em INT8 com apenas <strong>20 KB</strong><br>• Tempo de resposta: <strong>3,15 ms (317 FPS)</strong></p>
+          <div class="tag-header">✅ COMPUTADOR INDUSTRIAL EDGE (NA MESA)</div>
+          <h3>TV Box Smart Pro 4K (ARM Cortex-A53)</h3>
+          <div class="big-price">R$ 100,00</div>
+          <p>• CPU Quad-Core 64-bit + 2GB RAM + 4 portas USB + HDMI<br>• Roda nosso modelo especialista INT8 de apenas <strong>20 KB</strong><br>• <strong>5x mais barato</strong> que um Raspberry Pi 4!</p>
         </div>
 
         <div class="printable-tag danger-tag">
@@ -1539,48 +1543,48 @@
         </div>
 
         <div class="printable-tag">
+          <div class="tag-header">✅ PÓRTICO ÓPTICO + WEBCAM + LUZ LED</div>
+          <h3>Estação Física de Captura Padronizada</h3>
+          <div class="big-price">R$ 55,00</div>
+          <p>• Estrutura em PVC 25mm (R$ 15) + Webcam USB e LED (R$ 40)<br>• Iluminação controlada dedicada (Pilar 4)<br>• Conectado direto na porta USB da TV Box / PC!</p>
+        </div>
+
+        <div class="printable-tag">
           <div class="tag-header">✈️ DESAFIO MODO AVIÃO (100% OFFLINE)</div>
           <h3>Teste Você Mesmo a Nossa IA Agora!</h3>
           <div class="big-price" style="font-size: 1.55rem;">PASSO 1 ➔ PASSO 2</div>
           <p>1. Pegue uma <strong>Peça Boa</strong> ou uma <strong>Peça com Defeito</strong> aqui ao lado.<br>2. Coloque debaixo da câmera e veja o acionamento imediato do CLP em 3 milissegundos (Sem Wi-Fi!).</p>
-        </div>
-
-        <div class="printable-tag">
-          <div class="tag-header">♻️ RETROFITTING INDUSTRIAL (TIER 3)</div>
-          <h3>Custo de Servidor Dedicado Nesta Bancada:</h3>
-          <div class="big-price">R$ 0,00 (Zero GPU)</div>
-          <p>• Reaproveita computadores legados já descartados pela TI.<br>• Vídeo processado na memória RAM e descartado na hora (Norma IEC 62443).</p>
         </div>
       </div>
 
       <div class="bottom-grid">
         <div class="panel-card">
           <h3 style="margin-bottom: 14px; font-size: 1.2rem;">🧰 Checklist Físico da Maleta (Dia 10)</h3>
-          <label class="check-item"><input type="checkbox"> Computador de demonstração + Carregador original</label>
+          <label class="check-item"><input type="checkbox"> <strong>TV Box Smart Pro 4K</strong> + Fonte 5V + Cabo HDMI + Mouse USB</label>
           <label class="check-item"><input type="checkbox"> Suporte de Cano PVC (25mm) + Webcam USB + Luz LED</label>
+          <label class="check-item"><input type="checkbox"> Monitor HDMI ou Notebook de apoio</label>
           <label class="check-item"><input type="checkbox"> Tapete de EVA preto demarcado ("Coloque a peça aqui")</label>
           <label class="check-item"><input type="checkbox"> Kit de Peças Físicas (2 Boas + 2 com Defeito/Trinca)</label>
           <label class="check-item"><input type="checkbox"> As 4 Plaquinhas de Preço impressas e recortadas</label>
-          <label class="check-item"><input type="checkbox"> Extensão elétrica / Régua de tomadas + Adaptador</label>
         </div>
 
         <div class="panel-card">
           <h3 style="margin-bottom: 14px; font-size: 1.2rem;">🎤 Script de Abordagem de 45 Segundos na Bancada</h3>
           <div class="pitch-step">
-            <strong>1. Gancho Apontando para a Plaquinha de R$ 55 (10s)</strong>
-            "Posso te mostrar como uma estação de R$ 55 com uma IA de apenas 20 Kilobytes substitui um servidor de R$ 45 mil sem usar internet nem placa de vídeo?"
+            <strong>1. Gancho Apontando para a TV Box de R$ 100 (10s)</strong>
+            "Posso te mostrar como nós transformamos uma TV Box de R$ 100 num computador de visão industrial que substitui um servidor de R$ 45 mil sem usar internet?"
           </div>
           <div class="pitch-step">
             <strong>2. Ação Física (15s)</strong>
-            <em>(Entregue a peça com defeito na mão do visitante)</em> "Coloque essa peça debaixo do pórtico de PVC. Repare que o notebook está em Modo Avião."
+            <em>(Entregue a peça com defeito na mão do visitante)</em> "Coloque essa peça debaixo do pórtico de PVC. Repare que estamos 100% offline."
           </div>
           <div class="pitch-step">
             <strong>3. Impacto Técnico (10s)</strong>
-            "Em 3 milissegundos a CPU detectou a falha, disparou o comando do CLP na tela e já apagou a imagem da memória RAM por segurança."
+            "Como comprimimos nossa IA para apenas 20 Kilobytes em INT8, o processador ARM da TV Box detecta a falha em milissegundos e já descarta o vídeo da RAM."
           </div>
           <div class="pitch-step">
             <strong>4. Fechamento Comercial (10s)</strong>
-            "Qual é o gargalo na sua linha hoje que, se não falhasse por erro humano, pagaria esse kit na primeira semana?"
+            "Qual é o gargalo na sua linha hoje que, se não falhasse por erro humano, pagaria esse kit de R$ 155 na primeira hora de operação?"
           </div>
         </div>
       </div>

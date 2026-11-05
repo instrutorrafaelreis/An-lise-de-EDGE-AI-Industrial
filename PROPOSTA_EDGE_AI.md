@@ -44,16 +44,16 @@ Para garantir o menor CAPEX possível para cada cenário, a solução é homolog
 
 | Nível (Tier) | Hardware Alvo | Capacidade e Aplicação Típica no Chão de Fábrica |
 | :--- | :--- | :--- |
-| **Tier 1: Micro (TinyML)** | Microcontroladores avançados (ex.: **ESP32-S3** Dual-Core LX7 com instruções vetoriais, ~512 KB SRAM / 8 MB PSRAM) | Tarefas ultrassimples de baixíssimo custo (resoluções 96x96 a 160x160 via arquitetura FOMO `[10]`): detecção de presença/ausência, leitura de mostradores e alertas estáticos. |
-| **Tier 2: Embarcado** | Single-Board Computers (ex.: **Raspberry Pi 4 / 5** ARM Cortex-A72/A76 com aceleração NEON) | Monitoramento de postos de trabalho, conformidade de EPIs, contagem em esteiras de velocidade moderada (10 a 25 FPS em `INT8`). |
-| **Tier 3: Reaproveitamento (Retrofitting)** | **PCs industriais legados ou notebooks descartados pela TI** (Intel Core i3/i5 antigos com *OpenVINO* `[11]`) | Inspeção de qualidade em esteiras rápidas (30 a 100+ FPS em CPU), detecção de defeitos superficiais em tempo real e processamento de múltiplas câmeras a custo zero de aquisição de hardware. |
+| **Tier 1: Micro (TinyML)** | Microcontroladores avançados (ex.: **ESP32-S3 / ESP32-CAM** Dual-Core LX7 com instruções vetoriais, ~512 KB SRAM / 8 MB PSRAM) | Tarefas ultrassimples de baixíssimo custo (resoluções 96x96 a 160x160 via arquitetura FOMO `[10]`): detecção de presença/ausência, leitura de mostradores e alertas estáticos. |
+| **Tier 2: Embarcado / Smart Box** | **TV Box Smart Pro Android 4K (ARM Cortex-A53 Quad-Core 64-bit, 2GB RAM, 16GB eMMC, ~R$ 100)** `[13]` ou Single-Board Computers (**Raspberry Pi 4 / 5** ARM Cortex-A72/A76) | Monitoramento de postos de trabalho, conformidade de EPIs, contagem em esteiras de velocidade moderada e inspeção via Webcam USB por 1/5 do custo de um SBC tradicional. |
+| **Tier 3: Reaproveitamento (Retrofitting)** | **PCs industriais legados ou notebooks descartados pela TI** (Intel Core i3/i5 antigos com *OpenVINO* `[11]`) | Inspeção de qualidade em esteiras rápidas (30 a 300+ FPS em CPU), detecção de defeitos superficiais em tempo real e processamento de múltiplas câmeras a custo zero de aquisição de hardware. |
 
 ---
 
 ## 5. PROPOSTA DE VALOR E INTEGRAÇÃO INDUSTRIAL (OT/IT)
 
 1. **Operação *Offline-First* (Tolerância Zero a Quedas de Rede):** O processamento e a tomada de decisão (acionar alarme, desviar produto defeituoso ou intertravar máquina) ocorrem em milissegundos no dispositivo local.
-2. **Democratização do CAPEX e Sustentabilidade (*Upcycling*):** Substitui investimentos de dezenas de milhares de reais em servidores GPU por placas embarcadas de poucas centenas de reais ou pelo reaproveitamento de computadores já depreciados na planta.
+2. **Democratização do CAPEX e Sustentabilidade (*Upcycling*):** Substitui investimentos de dezenas de milhares de reais em servidores GPU por placas embarcadas/TV Boxes ARM de ~R$ 100 ou pelo reaproveitamento de computadores já depreciados na planta.
 3. **Privacidade, Segurança Cibernética e Leveza de Rede (IEC 62443):** As imagens são processadas em memória volátil (RAM) e descartadas imediatamente após a inferência. Nenhum vídeo do processo industrial trafega pela internet.
 4. **Interoperabilidade Nativa com Automação (CLP) e Gestão (ERP/MES):** O dispositivo envia apenas pacotes mínimos de metadados (via **MQTT**, **Modbus TCP**, **OPC-UA** ou pulso elétrico via **GPIO/Relé**) diretamente para o **CLP** da máquina e para o **ERP**.
 
@@ -73,3 +73,4 @@ Para garantir o menor CAPEX possível para cada cenário, a solução é homolog
 10. **Edge Impulse Research (2022).** *FOMO: Faster Objects, More Objects — Constrained Object Detection on Microcontrollers.* *(Demonstra detecção de objetos em microcontroladores como ESP32 com menos de 250 KB de RAM).*
 11. **Intel Corporation (2024).** *Intel Distribution of OpenVINO Toolkit Benchmark Results.* *(Documenta aceleração de 2x a 4x em inferência INT8 em processadores Intel Core/Xeon sem GPU dedicada).*
 12. **ABNT NBR IEC 60529.** *Graus de proteção providos por invólucros (Códigos IP).* Associação Brasileira de Normas Técnicas. *(Padronização de proteção IP65/IP67 contra poeira e umidade na indústria).*
+13. **Hardware Embarcado de Referência (Smart Pro Android 4K / ARMv8-A Cortex-A53).** *Especificação Técnica SoC Quad-Core 64-bit ARM Cortex-A53 (Allwinner H313 / Amlogic S905W / Rockchip), 2 GB DDR3 RAM, 16 GB eMMC, Interfaces USB 2.0 Host e HDMI.* *(Homologado como plataforma Edge AI de ultrabaixo custo — ~R$ 100 — para execução de modelos especialistas quantizados em INT8).*
