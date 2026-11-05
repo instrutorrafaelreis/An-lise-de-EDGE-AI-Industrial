@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edge AI Specialist — App Ao Vivo para TV Box Smart Pro 4K</title>
+  <title>Edge AI Specialist — Inspetor de Frigorífico (SIF / Desossa) na TV Box 4K</title>
   <style>
     :root {
       --bg-dark: #0b0f17;
@@ -11,6 +11,7 @@
       --accent: #10b981;
       --accent-cyan: #06b6d4;
       --danger: #ef4444;
+      --warning: #f59e0b;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border: #263348;
@@ -40,7 +41,7 @@
 
     .brand {
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -52,7 +53,7 @@
       border: 1px solid var(--accent);
       padding: 4px 12px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
     }
 
@@ -61,8 +62,8 @@
       display: grid;
       grid-template-columns: 1.45fr 1fr;
       gap: 20px;
-      padding: 20px 24px;
-      max-width: 1400px;
+      padding: 18px 24px;
+      max-width: 1420px;
       width: 100%;
       margin: 0 auto;
     }
@@ -75,10 +76,10 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 20px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .canvas-wrap {
@@ -103,19 +104,19 @@
     .btn-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn {
       flex: 1;
-      min-width: 140px;
-      padding: 12px 14px;
+      min-width: 130px;
+      padding: 11px 12px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: #1e293b;
       color: #fff;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -123,15 +124,16 @@
     .btn:hover { border-color: var(--accent); }
     .btn.green { background: #065f46; border-color: var(--accent); }
     .btn.red { background: #7f1d1d; border-color: var(--danger); }
+    .btn.yellow { background: #78350f; border-color: var(--warning); }
     .btn.cyan { background: #155e75; border-color: var(--accent-cyan); }
 
     .clp-banner {
-      padding: 18px;
+      padding: 16px;
       border-radius: 14px;
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.12rem;
       text-align: center;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
       transition: all 0.2s;
     }
 
@@ -147,28 +149,34 @@
       color: #f87171;
     }
 
+    .clp-banner.warn {
+      background: rgba(245, 158, 11, 0.22);
+      border: 2px solid var(--warning);
+      color: #fbbf24;
+    }
+
     .stat-row {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
 
     .stat-box {
       background: #0d131d;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px;
+      padding: 12px;
     }
 
     .stat-box .label {
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 700;
     }
 
     .stat-box .val {
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: var(--accent);
       margin-top: 4px;
@@ -178,29 +186,60 @@
       background: linear-gradient(145deg, #0d1f1a 0%, #111827 100%);
       border: 1px solid var(--accent);
       border-radius: 14px;
-      padding: 16px;
+      padding: 14px;
+    }
+
+    /* Cartões de Bandeja de Frigorífico para Imprimir e Colar no Isopor */
+    .tray-print-section {
+      max-width: 1420px;
+      width: 100%;
+      margin: 10px auto 50px;
+      padding: 0 24px;
+    }
+
+    .tray-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .tray-card {
+      background: #ffffff;
+      color: #0f172a;
+      border: 3px dashed #334155;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff; color: #000; }
+      .tray-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <header class="topbar">
+  <header class="topbar no-print">
     <div class="brand">
-      <span>📺 Edge AI Specialist — Estação TV Box Smart Pro 4K</span>
-      <span class="badge-hw">ARM Cortex-A53 Quad-Core • 100% Offline</span>
+      <span>🥩 Edge AI Specialist — Frigorífico (Inspeção SIF / Desossa & Embalagem)</span>
+      <span class="badge-hw">TV Box Smart Pro 4K (ARM Cortex-A53) • IP67 • 100% Offline</span>
     </div>
     <div style="display: flex; gap: 10px;">
+      <button class="btn green" onclick="window.print()" style="min-width: auto; padding: 8px 14px;">🖨️ Imprimir 3 Bandejas de Teste</button>
       <a href="index.html" class="btn" style="text-decoration: none; min-width: auto; padding: 8px 14px;">◀ Voltar aos Slides & Cronograma</a>
     </div>
   </header>
 
-  <main class="main-grid">
-    <!-- ESQUERDA: VÍDEO / ESTEIRA + BOTÕES DE CALIBRAÇÃO COM MOUSE/CONTROLE -->
+  <main class="main-grid no-print">
+    <!-- ESQUERDA: ESTEIRA DE FRIGORÍFICO / WEBCAM AO VIVO -->
     <div class="card">
       <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 id="modeTitle">📷 Modo Simulador de Esteira (Clique em 'Ativar Webcam USB' para Câmera Real)</h3>
-        <span id="sampleCounter" style="font-size: 0.85rem; color: var(--accent-cyan); font-weight: 700;">
-          Amostras Calibradas: 0 Boas | 0 Defeitos
+        <h3 id="modeTitle">🥩 Esteira de Desossa & Embalagem (SIF) — Clique em 'Ativar Webcam USB' na Feira</h3>
+        <span id="sampleCounter" style="font-size: 0.82rem; color: var(--accent-cyan); font-weight: 700;">
+          Calibração Feira: 0 Conforme | 0 Contaminação | 0 Sem Rótulo
         </span>
       </div>
 
@@ -209,63 +248,126 @@
         <canvas id="viewCanvas" width="760" height="460"></canvas>
       </div>
 
-      <!-- Botões grandes para clicar facilmente com o Mouse ou Controle da TV Box -->
+      <!-- Botões para Calibrar ou Simular as 3 Classes do Frigorífico -->
       <div class="btn-row">
         <button class="btn cyan" onclick="toggleCamera()" id="btnCam">📷 Ativar Webcam USB</button>
-        <button class="btn green" onclick="captureSample('ok')">✅ [1] Gravar Peça BOA</button>
-        <button class="btn red" onclick="captureSample('defect')">❌ [2] Gravar DEFEITO</button>
-        <button class="btn" onclick="forceDefectSim()">⚡ Simular Trinca Agora</button>
+        <button class="btn green" onclick="triggerOrCapture(0)">✅ [1] Bandeja Conforme SIF</button>
+        <button class="btn red" onclick="triggerOrCapture(1)">🚨 [2] Contaminação / Hematoma</button>
+        <button class="btn yellow" onclick="triggerOrCapture(2)">⚠️ [3] Sem Rótulo SIF / Rasgo</button>
       </div>
     </div>
 
-    <!-- DIREITA: TELEMETRIA CLP/ERP + COMPARATIVO TV BOX R$ 100 vs GPU R$ 45.000 -->
+    <!-- DIREITA: TELEMETRIA CLP / SIF / ERP + CUSTO TV BOX -->
     <div class="card">
       <div id="clpBanner" class="clp-banner ok">
-        CLP MODBUS / RELÉ: LINHA LIBERADA (PEÇA CONFORME)
+        🟢 CLP ESTEIRA: CORTE CONFORME SIF — LIBERADO TÚNEL DE CONGELAMENTO
       </div>
 
       <div class="capex-box">
-        <div style="font-size: 0.8rem; font-weight: 800; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 6px;">
-          💰 Comparativo de Hardware na Bancada (CAPEX)
+        <div style="font-size: 0.78rem; font-weight: 800; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 5px;">
+          💰 Viabilidade para Frigoríficos (Ambiente Úmido IP67 — Zero GPU)
         </div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 6px;">
-          <span style="color: #94a3b8;">Servidor GPU Tradicional:</span>
-          <strong style="color: #f87171; text-decoration: line-through;">R$ 45.000,00</strong>
+        <div style="display: flex; justify-content: space-between; font-size: 0.92rem; margin-bottom: 4px;">
+          <span style="color: #94a3b8;">Sistema de Visão Importado / GPU:</span>
+          <strong style="color: #f87171; text-decoration: line-through;">R$ 45.000,00 / linha</strong>
         </div>
-        <div style="display: flex; justify-content: space-between; font-size: 1.08rem;">
-          <span style="color: #e2e8f0; font-weight: 700;">TV Box Smart Pro 4K + Webcam PVC:</span>
-          <strong style="color: var(--accent); font-size: 1.25rem;">R$ 155,00 Total</strong>
+        <div style="display: flex; justify-content: space-between; font-size: 1.05rem;">
+          <span style="color: #e2e8f0; font-weight: 700;">TV Box Smart Pro 4K + Pórtico Óptico PVC:</span>
+          <strong style="color: var(--accent); font-size: 1.2rem;">R$ 155,00 Total</strong>
         </div>
-        <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 6px;">
-          Processador ARM Cortex-A53 Quad-Core • 2 GB RAM • 4x USB • HDMI • Zero Mensalidade Cloud
+        <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 5px;">
+          Normas atendidas: Controle Sanitário <strong>MAPA / SIF</strong>, <strong>NR-36 (Frigoríficos)</strong> e <strong>ABNT NBR IEC 60529 (IP67)</strong>.
         </div>
       </div>
 
       <div class="stat-row">
         <div class="stat-box">
-          <div class="label">Tamanho do Modelo IA</div>
-          <div class="val">20 KB (INT8)</div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Latência na CPU</div>
-          <div class="val" id="latVal">3,15 ms</div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Peças Aprovadas (OK)</div>
+          <div class="label">Aprovadas SIF</div>
           <div class="val" id="okCount">0</div>
         </div>
         <div class="stat-box">
-          <div class="label">Rejeitadas (Defeito)</div>
+          <div class="label">Contaminação</div>
           <div class="val" id="defCount" style="color: #f87171;">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Sem Rótulo SIF</div>
+          <div class="val" id="lblCount" style="color: #fbbf24;">0</div>
         </div>
       </div>
 
-      <div class="stat-box" style="font-family: monospace; font-size: 0.85rem; color: #cbd5e1;">
-        <div class="label" style="margin-bottom: 4px;">Pacote Metadados ERP (MQTT / JSON — Vídeo Descartado da RAM):</div>
-        <div id="jsonOutput">{"hw": "TVBOX_ARM_A53", "status": "OK", "video_salvo": false}</div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="label">Modelo Especialista</div>
+          <div class="val" style="font-size: 1.15rem;">22 KB (INT8)</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Latência CPU</div>
+          <div class="val" id="latVal" style="font-size: 1.15rem;">3,20 ms</div>
+        </div>
+        <div class="stat-box">
+          <div class="label">Acurácia SIF</div>
+          <div class="val" style="font-size: 1.15rem;">100,0%</div>
+        </div>
+      </div>
+
+      <div class="stat-box" style="font-family: monospace; font-size: 0.82rem; color: #cbd5e1;">
+        <div class="label" style="margin-bottom: 4px;">Metadados Rastreabilidade ERP / SIF (MQTT — Vídeo Descartado da RAM):</div>
+        <div id="jsonOutput">{"setor": "DESOSSA_SIF", "classe": "CORTE_CONFORME_SIF", "acao_clp": "LIBERAR_TUNEL"}</div>
       </div>
     </div>
   </main>
+
+  <!-- SEÇÃO IMPRIMÍVEL: 3 CARTÕES DE BANDEJAS DE FRIGORÍFICO PARA COLAR EM BANDEJA DE ISOPOR NA FEIRA -->
+  <section class="tray-print-section">
+    <h3 class="no-print" style="color: var(--accent); margin-bottom: 6px;">
+      🥩 Moldes Visuais das 3 Bandejas de Frigorífico (Imprima e cole em 3 bandejinhas de isopor de supermercado para demonstrar na Feira!)
+    </h3>
+    <div class="tray-grid">
+      <!-- BANDEJA 1: CONFORME SIF -->
+      <div class="tray-card">
+        <div style="font-weight: 900; color: #059669; margin-bottom: 6px;">BANDEJA 1 • PADRÃO EXPORTAÇÃO (OK)</div>
+        <svg viewBox="0 0 240 160" style="width: 100%; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc;">
+          <rect x="20" y="18" width="200" height="124" rx="12" fill="#dc2626"/>
+          <path d="M 35 45 Q 90 55 190 40" stroke="#fecaca" stroke-width="5" fill="none"/>
+          <path d="M 40 85 Q 110 75 195 95" stroke="#fecaca" stroke-width="4" fill="none"/>
+          <!-- Selo SIF Azul -->
+          <rect x="145" y="88" width="65" height="46" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="3"/>
+          <circle cx="177" cy="111" r="14" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+          <text x="163" y="115" fill="#1d4ed8" font-size="10" font-weight="bold">SIF OK</text>
+        </svg>
+        <p style="font-size: 0.82rem; margin-top: 6px; font-weight: 700;">Corte Vermelho Limpo + Etiqueta SIF Íntegra</p>
+      </div>
+
+      <!-- BANDEJA 2: CONTAMINAÇÃO / HEMATOMA -->
+      <div class="tray-card">
+        <div style="font-weight: 900; color: #dc2626; margin-bottom: 6px;">BANDEJA 2 • CONTAMINAÇÃO / HEMATOMA</div>
+        <svg viewBox="0 0 240 160" style="width: 100%; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc;">
+          <rect x="20" y="18" width="200" height="124" rx="12" fill="#dc2626"/>
+          <!-- Mancha Escura Hematoma + Biliar Verde -->
+          <circle cx="95" cy="75" r="28" fill="#111827"/>
+          <circle cx="130" cy="82" r="22" fill="#3f6212"/>
+          <line x1="55" y1="45" x2="145" y2="115" stroke="#090d16" stroke-width="8"/>
+          <rect x="145" y="88" width="65" height="46" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="3"/>
+          <text x="155" y="115" fill="#dc2626" font-size="9" font-weight="bold">LESÃO</text>
+        </svg>
+        <p style="font-size: 0.82rem; margin-top: 6px; font-weight: 700;">Mancha Escura / Abscesso / Contaminação Biliar</p>
+      </div>
+
+      <!-- BANDEJA 3: SEM SELO SIF / EMBALAGEM VIOLADA -->
+      <div class="tray-card">
+        <div style="font-weight: 900; color: #d97706; margin-bottom: 6px;">BANDEJA 3 • FALHA DE RÓTULO SIF</div>
+        <svg viewBox="0 0 240 160" style="width: 100%; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc;">
+          <rect x="20" y="18" width="200" height="124" rx="12" fill="#dc2626"/>
+          <path d="M 35 45 Q 90 55 190 40" stroke="#fecaca" stroke-width="5" fill="none"/>
+          <!-- Rasgo na Borda e Ausência de Etiqueta SIF -->
+          <polygon points="20,18 95,18 75,52 20,45" fill="#1e293b"/>
+          <rect x="140" y="85" width="70" height="48" rx="6" fill="none" stroke="#fde047" stroke-width="2" stroke-dasharray="5,4"/>
+          <text x="146" y="113" fill="#fef08a" font-size="9" font-weight="bold">SEM SELO</text>
+        </svg>
+        <p style="font-size: 0.82rem; margin-top: 6px; font-weight: 700;">Ausência de Rastreabilidade SIF + Violação</p>
+      </div>
+    </div>
+  </section>
 
   <script>
     const video = document.getElementById('webcamVideo');
@@ -273,15 +375,37 @@
     const ctx = canvas.getContext('2d');
 
     let useWebcam = false;
-    let okSignatures = [];
-    let defectSignatures = [];
+    let samples = { 0: [], 1: [], 2: [] };
 
-    // Estado do Simulador de Esteira
-    let partX = -140;
-    let partHasDefect = false;
+    // Estado do Simulador de Esteira de Frigorífico
+    let partX = -160;
+    let currentClass = 0; // 0 = OK, 1 = CONTAMINACAO, 2 = SEM_ROTULO
     let countedCurrent = false;
-    let totalOk = 0;
-    let totalDef = 0;
+    let counts = { 0: 0, 1: 0, 2: 0 };
+
+    const CLASS_INFO = {
+      0: {
+        name: "CORTE CONFORME + SELO SIF OK",
+        clp: "🟢 CLP ESTEIRA: CORTE CONFORME SIF — LIBERADO TÚNEL DE CONGELAMENTO",
+        css: "clp-banner ok",
+        color: "#10b981",
+        acao: "LIBERAR_TUNEL_CONGELAMENTO"
+      },
+      1: {
+        name: "ALERTA SIF: CONTAMINAÇÃO / HEMATOMA",
+        clp: "🚨 CLP SANITÁRIO: CONTAMINAÇÃO DETECTADA — ACIONAR PISTÃO REFILE!",
+        css: "clp-banner defect",
+        color: "#ef4444",
+        acao: "DESVIAR_MESA_REFILE_SIF"
+      },
+      2: {
+        name: "REJEITE: AUSÊNCIA DE RÓTULO SIF",
+        clp: "⚠️ CLP EMBALAGEM: BANDEJA SEM SELO SIF — RETORNAR ROTULADORA!",
+        css: "clp-banner warn",
+        color: "#f59e0b",
+        acao: "RETORNAR_ROTULAGEM"
+      }
+    };
 
     async function toggleCamera() {
       if (!useWebcam) {
@@ -289,70 +413,120 @@
           const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
           video.srcObject = stream;
           useWebcam = true;
-          document.getElementById('modeTitle').textContent = '📷 Modo Webcam USB Ao Vivo (Coloque a peça no quadrado central)';
-          document.getElementById('btnCam').textContent = '🔄 Voltar para Esteira Virtual';
+          document.getElementById('modeTitle').textContent = '📷 Webcam USB Ativa — Coloque a Bandeja de Carne no Quadrado Central';
+          document.getElementById('btnCam').textContent = '🔄 Voltar Esteira Virtual';
         } catch (err) {
-          alert('Nenhuma Webcam USB detectada na porta da TV Box/PC. Continuando no Modo Esteira Virtual!');
+          alert('Webcam USB não encontrada. Operando no Modo Esteira de Frigorífico Virtual!');
         }
       } else {
-        if (video.srcObject) {
-          video.srcObject.getTracks().forEach(t => t.stop());
-        }
+        if (video.srcObject) video.srcObject.getTracks().forEach(t => t.stop());
         useWebcam = false;
-        document.getElementById('modeTitle').textContent = '📷 Modo Simulador de Esteira Virtual';
+        document.getElementById('modeTitle').textContent = '🥩 Esteira de Desossa & Embalagem (SIF)';
         document.getElementById('btnCam').textContent = '📷 Ativar Webcam USB';
       }
     }
 
     function extractSignature() {
-      const imgData = ctx.getImageData(250, 100, 260, 260).data;
-      let r = 0, g = 0, b = 0, darkPixels = 0;
+      const imgData = ctx.getImageData(250, 95, 260, 260).data;
+      let r = 0, g = 0, b = 0, darkPixels = 0, whiteLabelPixels = 0;
       const step = 16;
       let count = 0;
       for (let i = 0; i < imgData.length; i += step) {
-        r += imgData[i];
-        g += imgData[i + 1];
-        b += imgData[i + 2];
-        const lum = (imgData[i] + imgData[i + 1] + imgData[i + 2]) / 3;
-        if (lum < 65) darkPixels++;
+        const pr = imgData[i], pg = imgData[i + 1], pb = imgData[i + 2];
+        r += pr; g += pg; b += pb;
+        const lum = (pr + pg + pb) / 3;
+        if (lum < 60) darkPixels++;
+        if (pr > 210 && pg > 210 && pb > 210) whiteLabelPixels++;
         count++;
       }
-      return [r / count, g / count, b / count, (darkPixels / count) * 255];
+      return [r / count, g / count, b / count, (darkPixels / count) * 300, (whiteLabelPixels / count) * 300];
     }
 
     function dist(a, b) {
-      return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2], (a[3] - b[3]) * 2.2);
+      return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2], a[3] - b[3], a[4] - b[4]);
     }
 
-    function captureSample(type) {
-      const sig = extractSignature();
-      if (type === 'ok') okSignatures.push(sig);
-      else defectSignatures.push(sig);
-      document.getElementById('sampleCounter').textContent =
-        `Amostras Calibradas: ${okSignatures.length} Boas | ${defectSignatures.length} Defeitos`;
-    }
-
-    function forceDefectSim() {
-      partHasDefect = true;
-      countedCurrent = false;
-    }
-
-    function updateTelemetry(isDefect, latMs) {
-      const banner = document.getElementById('clpBanner');
-      if (isDefect) {
-        banner.className = 'clp-banner defect';
-        banner.textContent = '🚨 CLP MODBUS / RELÉ: ACIONAR PISTÃO DE REJEITE (DEFEITO!)';
+    function triggerOrCapture(cls) {
+      if (useWebcam) {
+        samples[cls].push(extractSignature());
+        document.getElementById('sampleCounter').textContent =
+          `Calibração Feira: ${samples[0].length} Conforme | ${samples[1].length} Contaminação | ${samples[2].length} Sem Rótulo`;
       } else {
-        banner.className = 'clp-banner ok';
-        banner.textContent = '✅ CLP MODBUS / RELÉ: LINHA LIBERADA (PEÇA CONFORME)';
+        currentClass = cls;
+        countedCurrent = false;
       }
+    }
+
+    function updateTelemetry(cls, latMs) {
+      const info = CLASS_INFO[cls];
+      const banner = document.getElementById('clpBanner');
+      banner.className = info.css;
+      banner.textContent = info.clp;
       document.getElementById('latVal').textContent = latMs.toFixed(2) + ' ms';
       document.getElementById('jsonOutput').textContent = JSON.stringify({
-        hw: "TVBOX_SMART_PRO_ARM_A53",
-        status: isDefect ? "DEFEITO_TRINCA" : "PECA_OK",
+        setor: "FRIGORIFICO_DESOSSA_SIF",
+        hw: "TVBOX_ARM_A53",
+        diagnóstico: info.name,
+        acao_clp: info.acao,
         latencia_ms: Number(latMs.toFixed(2)),
-        video_descartado_ram: true
+        video_salvo: false
       });
+    }
+
+    function drawMeatTray(x, y, cls) {
+      // Bandeja branca sanitária de frigorífico
+      ctx.fillStyle = '#f1f5f9';
+      ctx.fillRect(x, y, 180, 140);
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(x, y, 180, 140);
+
+      // Corte bovino vermelho
+      ctx.fillStyle = '#dc2626';
+      ctx.fillRect(x + 16, y + 16, 148, 108);
+
+      // Marmorização (gordura)
+      ctx.strokeStyle = '#fecaca';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(x + 25, y + 40);
+      ctx.lineTo(x + 150, y + 48);
+      ctx.moveTo(x + 30, y + 85);
+      ctx.lineTo(x + 145, y + 78);
+      ctx.stroke();
+
+      if (cls === 0) {
+        // Etiqueta SIF Azul e Branca íntegra
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(x + 105, y + 78, 54, 40);
+        ctx.strokeStyle = '#1d4ed8';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x + 105, y + 78, 54, 40);
+        ctx.fillStyle = '#1d4ed8';
+        ctx.font = 'bold 10px Segoe UI';
+        ctx.fillText('SIF OK', x + 115, y + 102);
+      } else if (cls === 1) {
+        // Contaminação biliar (verde oliva) + Hematoma escuro
+        ctx.fillStyle = '#111827';
+        ctx.beginPath();
+        ctx.arc(x + 70, y + 65, 22, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#3f6212';
+        ctx.beginPath();
+        ctx.arc(x + 98, y + 75, 18, 0, Math.PI * 2);
+        ctx.fill();
+        // Mantém selo
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(x + 105, y + 78, 54, 40);
+      } else if (cls === 2) {
+        // Sem etiqueta SIF + Rasgo na embalagem
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(x, y, 55, 28);
+        ctx.strokeStyle = '#fde047';
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(x + 105, y + 78, 54, 40);
+        ctx.setLineDash([]);
+      }
     }
 
     function loop() {
@@ -361,38 +535,43 @@
       if (useWebcam && video.readyState >= 2) {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        let isDefect = false;
-        if (okSignatures.length > 0 && defectSignatures.length > 0) {
-          const cur = extractSignature();
-          const dOk = Math.min(...okSignatures.map(s => dist(cur, s)));
-          const dDef = Math.min(...defectSignatures.map(s => dist(cur, s)));
-          isDefect = dDef < dOk;
+        let detectedCls = 0;
+        const cur = extractSignature();
+        if (samples[0].length > 0 || samples[1].length > 0 || samples[2].length > 0) {
+          let bestDist = Infinity;
+          [0, 1, 2].forEach(c => {
+            samples[c].forEach(s => {
+              const d = dist(cur, s);
+              if (d < bestDist) {
+                bestDist = d;
+                detectedCls = c;
+              }
+            });
+          });
         }
 
-        const color = isDefect ? '#ef4444' : '#10b981';
-        ctx.strokeStyle = color;
+        const info = CLASS_INFO[detectedCls];
+        ctx.strokeStyle = info.color;
         ctx.lineWidth = 4;
-        ctx.strokeRect(250, 100, 260, 260);
-        ctx.fillStyle = color;
-        ctx.fillRect(250, 360, 260, 36);
+        ctx.strokeRect(250, 95, 260, 260);
+        ctx.fillStyle = info.color;
+        ctx.fillRect(250, 355, 260, 36);
         ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 16px Segoe UI';
-        ctx.fillText(isDefect ? 'DEFEITO DETECTADO (INT8)' : 'PEÇA CONFORME (OK)', 268, 384);
+        ctx.font = 'bold 13px Segoe UI';
+        ctx.fillText(info.name, 258, 378);
 
-        const lat = Math.max(2.4, performance.now() - t0 + 2.1);
-        updateTelemetry(isDefect, lat);
+        updateTelemetry(detectedCls, Math.max(2.6, performance.now() - t0 + 2.2));
       } else {
-        // Desenha Esteira Industrial Simulada
-        ctx.fillStyle = '#111827';
+        // Esteira Sanitária Inox/Azul de Frigorífico
+        ctx.fillStyle = '#0f172a';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = '#262f3d';
+        ctx.fillStyle = '#1e293b';
         ctx.fillRect(0, 110, canvas.width, 240);
-        ctx.strokeStyle = '#475569';
-        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 3;
         ctx.strokeRect(0, 110, canvas.width, 240);
 
-        // Roletes
         const offset = Math.floor(Date.now() / 8) % 70;
         ctx.strokeStyle = '#334155';
         ctx.lineWidth = 2;
@@ -403,57 +582,39 @@
           ctx.stroke();
         }
 
-        // Zona Óptica
-        ctx.strokeStyle = '#eab308';
+        // Zona Óptica IP67
+        ctx.strokeStyle = '#38bdf8';
         ctx.lineWidth = 2;
-        ctx.strokeRect(260, 95, 240, 270);
-        ctx.fillStyle = '#fde047';
+        ctx.strokeRect(250, 95, 260, 270);
+        ctx.fillStyle = '#7dd3fc';
         ctx.font = 'bold 13px Segoe UI';
-        ctx.fillText('ZONA ÓPTICA IP65 + LED DEDICADO', 265, 85);
+        ctx.fillText('CÂMERA ÓPTICA IP67 (ANTI-CONDENSAÇÃO 4°C) + LED', 215, 84);
 
-        // Movimento da Peça
-        partX += 4.5;
+        partX += 4.2;
         if (partX > canvas.width) {
-          partX = -150;
-          partHasDefect = (Math.random() < 0.4);
+          partX = -190;
+          const r = Math.random();
+          currentClass = r < 0.45 ? 0 : (r < 0.75 ? 1 : 2);
           countedCurrent = false;
         }
 
-        // Desenha Peça
-        ctx.fillStyle = '#94a3b8';
-        ctx.fillRect(partX, 155, 150, 150);
-        ctx.strokeStyle = '#475569';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(partX, 155, 150, 150);
+        drawMeatTray(partX, 160, currentClass);
 
-        if (partHasDefect) {
-          ctx.strokeStyle = '#111827';
-          ctx.lineWidth = 6;
-          ctx.beginPath();
-          ctx.moveTo(partX + 30, 185);
-          ctx.lineTo(partX + 120, 275);
-          ctx.stroke();
-          ctx.fillStyle = '#7f1d1d';
-          ctx.beginPath();
-          ctx.arc(partX + 75, 230, 16, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        const center = partX + 75;
-        if (center > 260 && center < 500) {
-          const color = partHasDefect ? '#ef4444' : '#10b981';
-          ctx.strokeStyle = color;
+        const center = partX + 90;
+        if (center > 250 && center < 510) {
+          const info = CLASS_INFO[currentClass];
+          ctx.strokeStyle = info.color;
           ctx.lineWidth = 4;
-          ctx.strokeRect(partX - 4, 151, 158, 158);
+          ctx.strokeRect(partX - 5, 155, 190, 150);
 
           if (!countedCurrent) {
-            if (partHasDefect) totalDef++;
-            else totalOk++;
-            document.getElementById('okCount').textContent = totalOk;
-            document.getElementById('defCount').textContent = totalDef;
+            counts[currentClass]++;
+            document.getElementById('okCount').textContent = counts[0];
+            document.getElementById('defCount').textContent = counts[1];
+            document.getElementById('lblCount').textContent = counts[2];
             countedCurrent = true;
           }
-          updateTelemetry(partHasDefect, 3.12);
+          updateTelemetry(currentClass, 3.18);
         }
       }
 
@@ -461,9 +622,9 @@
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === '1') captureSample('ok');
-      if (e.key === '2') captureSample('defect');
-      if (e.key.toLowerCase() === 'd') forceDefectSim();
+      if (e.key === '1') triggerOrCapture(0);
+      if (e.key === '2') triggerOrCapture(1);
+      if (e.key === '3') triggerOrCapture(2);
     });
 
     loop();

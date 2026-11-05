@@ -1,0 +1,29 @@
+{
+  "setor_industrial": "Frigorifico (Inspecao de Cortes, Contaminacao SIF e Embalagem)",
+  "hardware_alvo": "TV Box Smart Pro 4K (ARM Cortex-A53) / PC Legado CPU",
+  "classes": {
+    "0": "CORTE_CONFORME_SIF",
+    "1": "CONTAMINACAO_HEMATOMA",
+    "2": "FALHA_ROTULO_EMBALAGEM"
+  },
+  "generalista_fp32": {
+    "parametros": 2542856,
+    "tamanho_mb": 9.83,
+    "latencia_ms": 9.99,
+    "fps": 100.1
+  },
+  "especialista_frigorifico_int8": {
+    "parametros": 15291,
+    "tamanho_mb": 0.02,
+    "tamanho_kb": 20.5,
+    "latencia_ms": 2.11,
+    "latencia_p95_ms": 2.99,
+    "fps": 473.7,
+    "acuracia_pct": 100.0
+  },
+  "ganhos": {
+    "reducao_parametros_pct": 99.4,
+    "reducao_tamanho_pct": 99.8,
+    "aceleracao_fps_x": 4.73
+  }
+}
