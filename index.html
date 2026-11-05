@@ -1047,26 +1047,26 @@
             </tr>
             <tr>
               <td><strong>Custo de Hardware / Ponto</strong></td>
-              <td class="col-trad">R$ 20.000 a R$ 60.000 (Servidor GPU)</td>
+              <td class="col-trad">R$ 20.000 a R$ 60.000 (Servidor GPU H100/A100)</td>
               <td class="col-edge">R$ 0 (PC Legado) a ~R$ 100 (TV Box Smart Pro 4K ARM)</td>
               <td>Sondagem CNI [3] / Ref. TV Box [13]</td>
             </tr>
             <tr>
-              <td><strong>Tamanho do Modelo</strong></td>
-              <td class="col-trad">9,83 MB a 250 MB (FP32 Generalista)</td>
-              <td class="col-edge">0,02 MB / 20 KB (-99,8% menor em INT8)</td>
-              <td>Google CVPR [7] / PoC Local</td>
+              <td><strong>Modelo Base vs. Otimizado</strong></td>
+              <td class="col-trad"><code>nvidia/nemotron-ocr-v2</code> (RegNetX-8GF: 56,9M params • 217,12 MB FP32)</td>
+              <td class="col-edge"><code>RegNetX-Edge-SIF</code> (9.731 params • <strong>11,9 KB INT8</strong> • -99,995%)</td>
+              <td>NVIDIA Build [14] / Google CVPR [7]</td>
             </tr>
             <tr>
               <td><strong>Velocidade na Mesma CPU</strong></td>
-              <td class="col-trad">45,1 FPS (22,16 ms/quadro)</td>
-              <td class="col-edge">317,7 FPS (3,15 ms/quadro — 7,04x mais rápido)</td>
-              <td>Benchmark PoC Local (CPU)</td>
+              <td class="col-trad">8,6 FPS (116,77 ms/quadro — Engasga s/ GPU)</td>
+              <td class="col-edge"><strong>840,7 FPS (1,19 ms/quadro — 98,2x mais rápido)</strong></td>
+              <td>Benchmark Real PoC Local (CPU)</td>
             </tr>
             <tr>
               <td><strong>Payback Estimado (ROI)</strong></td>
               <td class="col-trad">18 a 36 meses (80% travam no piloto)</td>
-              <td class="col-edge">1 a 4 meses</td>
+              <td class="col-edge">1 a 4 meses (100% Acurácia Validação SIF)</td>
               <td>RAND Corp. (2024) [1] / Gartner [2]</td>
             </tr>
           </tbody>
@@ -1202,8 +1202,8 @@
             Jacob, B. et al. <em>Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference.</em> Redução matemática de 75% (FP32 ➔ INT8) e aceleração em CPU.
           </div>
           <div class="ref-item">
-            <strong>[8–13] Qualcomm AI [9], Intel [11], Normas [12] & TV Box ARM64 [13]</strong>
-            Nagel et al. (2021); Normas <strong>ABNT NBR IEC 60529 (IP65/67)</strong> e <strong>IEC 62443</strong>; <strong>[13] TV Box Smart Pro Android 4K</strong> (SoC ARM Cortex-A53 Quad-Core 64-bit, 2GB DDR3, 16GB eMMC, 4x USB).
+            <strong>[8–14] NVIDIA Build [14], Normas [12] & TV Box ARM64 [13]</strong>
+            <strong>[14] NVIDIA Build:</strong> <a href="https://build.nvidia.com/nvidia/nemotron-ocr-v2" target="_blank" style="color: #38bdf8;">nvidia/nemotron-ocr-v2</a> (Backbone <em>RegNetX-8GF</em>, 53,8M–56,9M params, otimizado em nossa PoC para <strong>11,9 KB INT8</strong> e <strong>98,2x speedup</strong> em CPU); <strong>[13] TV Box Smart Pro 4K</strong> (ARM Cortex-A53 Quad-Core 64-bit, R$ 100); Normas <strong>IP65/67 [12]</strong>.
           </div>
         </div>
       </section>

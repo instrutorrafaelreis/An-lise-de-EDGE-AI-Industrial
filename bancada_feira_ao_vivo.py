@@ -32,20 +32,36 @@ CLASSES_FRIGORIFICO = {
 
 
 def criar_rede_frigorifico():
-    modelo = models.mobilenet_v3_small(weights=None)
-    modelo.features = nn.Sequential(*list(modelo.features.children())[:4])
-    for m in modelo.modules():
+    base = models.regnet_x_400mf(weights=None)
+    extrator_curto = nn.Sequential(
+        base.stem,
+        base.trunk_output.block1
+    )
+    for m in extrator_curto.modules():
         if isinstance(m, nn.BatchNorm2d):
             m.momentum = 0.8
-    modelo.avgpool = nn.AdaptiveAvgPool2d(1)
     dummy = torch.zeros(1, 3, 224, 224)
     with torch.no_grad():
-        canais = modelo.features(dummy).shape[1]
-    modelo.classifier = nn.Sequential(
-        nn.Linear(canais, 32),
-        nn.ReLU(),
-        nn.Linear(32, 3)
-    )
+        out_c = extrator_curto(dummy).shape[1]
+
+    class RegNetXFrigorificoEdge(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.features = extrator_curto
+            self.avgpool = nn.AdaptiveAvgPool2d(1)
+            self.classifier = nn.Sequential(
+                nn.Linear(out_c, 24),
+                nn.ReLU(),
+                nn.Linear(24, 3)
+            )
+
+        def forward(self, x: torch.Tensor) -> torch.Tensor:
+            x = self.features(x)
+            x = self.avgpool(x)
+            x = torch.flatten(x, 1)
+            return self.classifier(x)
+
+    modelo = RegNetXFrigorificoEdge()
     caminho = os.path.join(ARTIFACTS_DIR, "modelo_frigorifico_leve.pt")
     if os.path.exists(caminho):
         try:

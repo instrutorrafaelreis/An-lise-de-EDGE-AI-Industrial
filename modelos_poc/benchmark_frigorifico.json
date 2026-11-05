@@ -1,29 +1,33 @@
 {
-  "setor_industrial": "Frigorifico (Inspecao de Cortes, Contaminacao SIF e Embalagem)",
-  "hardware_alvo": "TV Box Smart Pro 4K (ARM Cortex-A53) / PC Legado CPU",
-  "classes": {
-    "0": "CORTE_CONFORME_SIF",
-    "1": "CONTAMINACAO_HEMATOMA",
-    "2": "FALHA_ROTULO_EMBALAGEM"
+  "Dominio_Industrial": "Frigorifico - Inspecao Sanitaria SIF/MAPA e Embalagem",
+  "Modelo_Origem_NVIDIA_Build": {
+    "Nome": "nvidia/nemotron-ocr-v2",
+    "URL_Oficial": "https://build.nvidia.com/nvidia/nemotron-ocr-v2",
+    "Arquitetura": "RegNetX-8GF Backbone + Transformer Recognizer + Relational Head (FP32)",
+    "Hardware_Exigido_NVIDIA": "NVIDIA H100 / A100 / B200 / L40S (Servidor GPU)",
+    "Parametros": 56916232,
+    "Tamanho_MB": 217.12,
+    "Latencia_CPU_ms": 116.77,
+    "FPS_CPU": 8.6
   },
-  "generalista_fp32": {
-    "parametros": 2542856,
-    "tamanho_mb": 9.83,
-    "latencia_ms": 9.99,
-    "fps": 100.1
+  "Modelo_Especialista_Otimizado_Edge_INT8": {
+    "Arquitetura": "RegNetX-Edge-SIF (Stem+Block1 + Destilacao + 30% Pruning + INT8)",
+    "Hardware_Alvo": "TV Box Smart Pro 4K (ARM Cortex-A53 Quad-Core, R$ 100) / PC Legado CPU",
+    "Parametros": 9731,
+    "Tamanho_MB": 0.0116,
+    "Tamanho_KB": 11.9,
+    "Latencia_CPU_ms": 1.19,
+    "FPS_CPU": 840.7,
+    "Acuracia_Validacao_Total_Pct": 100.0,
+    "Acuracia_Por_Classe_Pct": {
+      "0_CORTE_CONFORME_SIF": 100.0,
+      "1_CONTAMINACAO_HEMATOMA": 100.0,
+      "2_FALHA_ROTULO_EMBALAGEM": 100.0
+    }
   },
-  "especialista_frigorifico_int8": {
-    "parametros": 15291,
-    "tamanho_mb": 0.02,
-    "tamanho_kb": 20.5,
-    "latencia_ms": 2.11,
-    "latencia_p95_ms": 2.99,
-    "fps": 473.7,
-    "acuracia_pct": 100.0
-  },
-  "ganhos": {
-    "reducao_parametros_pct": 99.4,
-    "reducao_tamanho_pct": 99.8,
-    "aceleracao_fps_x": 4.73
+  "Ganhos_Reais_Otimizacao": {
+    "Reducao_Parametros_Pct": 99.983,
+    "Reducao_Tamanho_Disco_Pct": 99.995,
+    "Aceleracao_Velocidade_CPU": "98.2x mais rapido"
   }
 }
