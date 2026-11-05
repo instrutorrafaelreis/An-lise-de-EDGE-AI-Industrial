@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelo Visual de Montagem da Bancada — Edge AI Specialist</title>
+  <style>
+    :root {
+      --bg-dark: #0b0f17;
+      --bg-card: #151c28;
+      --bg-card-alt: #1b2434;
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.2);
+      --accent-cyan: #06b6d4;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #263348;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      padding: 36px 24px 80px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin: 34px 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .highlight { color: var(--accent); }
+    .highlight-cyan { color: var(--accent-cyan); }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 880px;
+      margin-bottom: 28px;
+    }
+
+    /* =====================================================================
+       1. PLANTA VISUAL DA MESA DA FEIRA (INTERACTIVE DIAGRAM)
+       ===================================================================== */
+    .booth-wrapper {
+      background: linear-gradient(180deg, #131b29 0%, #0e1420 100%);
+      border: 2px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .table-surface {
+      background: #1e2636;
+      border: 3px solid #334155;
+      border-radius: 18px;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr 1fr;
+      gap: 22px;
+      position: relative;
+    }
+
+    @media (max-width: 920px) {
+      .table-surface { grid-template-columns: 1fr; }
+    }
+
+    .zone-box {
+      background: #111824;
+      border: 2px dashed #3b4d6b;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .zone-box.zone-highlight {
+      border: 2px solid var(--accent);
+      background: linear-gradient(160deg, #111824 0%, rgba(16, 185, 129, 0.08) 100%);
+    }
+
+    .zone-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+    }
+
+    .price-sticker {
+      display: inline-block;
+      background: var(--accent);
+      color: #042f1e;
+      font-weight: 900;
+      font-size: 0.92rem;
+      padding: 5px 12px;
+      border-radius: 8px;
+      width: fit-content;
+      margin-top: 12px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .price-sticker.red {
+      background: var(--danger);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+    }
+
+    .visitor-bar {
+      margin-top: 18px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      font-weight: 700;
+      color: #67e8f9;
+      letter-spacing: 0.04em;
+    }
+
+    /* =====================================================================
+       2. BLUEPRINT DO PORTICO DE CANO PVC (R$ 15) + MEDIDAS
+       ===================================================================== */
+    .blueprint-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .blueprint-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .step-item {
+      background: #0e1420;
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.94rem;
+    }
+
+    .step-item strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* =====================================================================
+       3. FOLHA DE ETIQUETAS PRONTAS PARA IMPRIMIR E RECORTAR
+       ===================================================================== */
+    .print-sheet {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 12px;
+    }
+
+    .printable-tag {
+      background: #ffffff;
+      color: #0f172a;
+      border: 3px dashed #334155;
+      border-radius: 14px;
+      padding: 22px;
+      position: relative;
+    }
+
+    .printable-tag .tag-header {
+      background: #0f172a;
+      color: #10b981;
+      font-weight: 900;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .printable-tag.danger-tag .tag-header {
+      background: #dc2626;
+      color: #ffffff;
+    }
+
+    .printable-tag h3 {
+      font-size: 1.55rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .printable-tag .big-price {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #059669;
+      margin: 6px 0;
+    }
+
+    .printable-tag.danger-tag .big-price {
+      color: #dc2626;
+      text-decoration: line-through;
+    }
+
+    .printable-tag p {
+      font-size: 0.95rem;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .btn-print {
+      background: var(--accent);
+      color: #042f1e;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-print:hover {
+      filter: brightness(1.08);
+    }
+
+    @media print {
+      body { background: #fff; color: #000; padding: 0; }
+      .no-print { display: none !important; }
+      .print-sheet { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .printable-tag { page-break-inside: avoid; border: 2px dashed #000; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="no-print">
+      <div class="badge">Guia Visual Prático • Montagem do Estande de Baixo Custo</div>
+      <h1>Como Montar a <span class="highlight">Bancada da Feira</span> Passo a Passo</h1>
+      <p class="subtitle">
+        Abaixo está a planta baixa exata de como dispor os objetos na mesa, o desenho com medidas do suporte de cano PVC (R$ 15) e as **etiquetas prontas para imprimir e recortar**.
+      </p>
+
+      <!-- =================================================================
+           SEÇÃO 1: VISTA SUPERIOR DA MESA DA FEIRA
+           ================================================================= -->
+      <h2>1. Mapa Visual da Mesa (Vista de Cima do Estande)</h2>
+      <div class="booth-wrapper">
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em;">
+          ⬆️ Lado onde você fica em pé apresentando ⬆️
+        </div>
+
+        <div class="table-surface">
+
+          <!-- ESQUERDA: ESTAÇÃO DE INSPEÇÃO FÍSICA (R$ 55) -->
+          <div class="zone-box zone-highlight">
+            <div>
+              <div class="zone-title">📍 Lado Esquerdo da Mesa • Interação Física</div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 10px;">1. Estação Óptica de PVC + Tapete EVA</h3>
+
+              <!-- SVG Ilustrativo da Estação na Mesa -->
+              <svg viewBox="0 0 320 210" style="width: 100%; background: #0b0f17; border-radius: 12px; border: 1px solid #263348; margin: 8px 0;">
+                <!-- Tapete EVA Esteira -->
+                <rect x="20" y="30" width="280" height="150" rx="10" fill="#18181b" stroke="#facc15" stroke-width="3" stroke-dasharray="10,6"/>
+                <text x="32" y="52" fill="#facc15" font-size="11" font-weight="bold">TAPETE EVA PRETO ("ESTEIRA")</text>
+
+                <!-- Peça Boa e Peça Ruim -->
+                <rect x="35" y="75" width="60" height="60" rx="6" fill="#10b981" opacity="0.25" stroke="#10b981" stroke-width="2"/>
+                <text x="44" y="108" fill="#10b981" font-size="10" font-weight="bold">PEÇA OK</text>
+
+                <rect x="35" y="142" width="60" height="30" rx="5" fill="#ef4444" opacity="0.25" stroke="#ef4444" stroke-width="2"/>
+                <text x="42" y="161" fill="#ef4444" font-size="9" font-weight="bold">DEFEITO</text>
+
+                <!-- Quadrado Central sob a Câmera -->
+                <rect x="135" y="65" width="110" height="95" rx="8" fill="none" stroke="#10b981" stroke-width="3"/>
+                <circle cx="190" cy="112" r="24" fill="#06b6d4" opacity="0.25" stroke="#06b6d4" stroke-width="2"/>
+                <text x="148" y="116" fill="#ffffff" font-size="10" font-weight="bold">LENTE WEBCAM</text>
+                <text x="145" y="152" fill="#a7f3d0" font-size="9">+ LUZ LED USB</text>
+
+                <!-- Cano PVC Base -->
+                <rect x="265" y="50" width="18" height="120" rx="4" fill="#64748b"/>
+                <rect x="190" y="104" width="90" height="16" rx="4" fill="#94a3b8"/>
+                <text x="205" y="96" fill="#cbd5e1" font-size="9" font-weight="bold">CANO PVC 25mm</text>
+              </svg>
+
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">
+                O visitante pega a <strong>Peça Boa</strong> ou a <strong>Peça com Risco/Defeito</strong> e coloca embaixo do arco de PVC.
+              </p>
+            </div>
+            <div class="price-sticker">🏷️ Etiqueta na Peça: R$ 55,00 Total</div>
+          </div>
+
+          <!-- CENTRO: NOTEBOOK EM MODO AVIÃO -->
+          <div class="zone-box">
+            <div>
+              <div class="zone-title">📍 Centro da Mesa • Processamento em CPU</div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 10px;">2. Notebook / PC Antigo (Modo Avião)</h3>
+
+              <!-- SVG Ilustrativo da Tela Dividida -->
+              <svg viewBox="0 0 340 210" style="width: 100%; background: #0b0f17; border-radius: 12px; border: 1px solid #263348; margin: 8px 0;">
+                <!-- Moldura Monitor -->
+                <rect x="20" y="18" width="300" height="155" rx="8" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+                <!-- Metade Esquerda: Camera Ao Vivo -->
+                <rect x="28" y="26" width="140" height="139" rx="4" fill="#0f172a"/>
+                <rect x="55" y="55" width="85" height="65" fill="none" stroke="#10b981" stroke-width="2"/>
+                <text x="36" y="44" fill="#10b981" font-size="10" font-weight="bold">WEBCAM AO VIVO</text>
+                <text x="45" y="142" fill="#ffffff" font-size="9">3,15 ms | 317 FPS</text>
+
+                <!-- Metade Direita: Slides / CAPEX -->
+                <rect x="174" y="26" width="138" height="139" rx="4" fill="#151c28"/>
+                <text x="184" y="46" fill="#06b6d4" font-size="10" font-weight="bold">COMPARATIVO CAPEX</text>
+                <text x="184" y="72" fill="#f87171" font-size="10">GPU: R$ 45.000</text>
+                <text x="184" y="96" fill="#10b981" font-size="11" font-weight="bold">EDGE: R$ 55,00</text>
+                <rect x="184" y="115" width="118" height="32" rx="4" fill="#10b981"/>
+                <text x="194" y="135" fill="#042f1e" font-size="10" font-weight="bold">CLP: LINHA OK</text>
+
+                <!-- Base Notebook -->
+                <polygon points="5,195 335,195 315,175 25,175" fill="#334155"/>
+                <text x="95" y="190" fill="#f8fafc" font-size="10" font-weight="bold">✈️ WI-FI DESLIGADO (OFFLINE)</text>
+              </svg>
+
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">
+                Rode o comando <code>python bancada_feira_ao_vivo.py</code>. Ele mostra a câmera e o comparativo de preço lado a lado.
+              </p>
+            </div>
+            <div class="price-sticker">🏷️ Custo de Servidor GPU: R$ 0,00</div>
+          </div>
+
+          <!-- DIREITA: COMPARATIVO DE IMPACTO + QR CODE -->
+          <div class="zone-box">
+            <div>
+              <div class="zone-title">📍 Lado Direito da Mesa • Prova de Conceito & Contato</div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 10px;">3. Placa ESP32 / Plaquinha Comparativa</h3>
+
+              <svg viewBox="0 0 300 210" style="width: 100%; background: #0b0f17; border-radius: 12px; border: 1px solid #263348; margin: 8px 0;">
+                <!-- Card Servidor Cortado -->
+                <rect x="20" y="20" width="120" height="80" rx="8" fill="#2a1215" stroke="#ef4444" stroke-width="2"/>
+                <text x="32" y="45" fill="#f87171" font-size="10" font-weight="bold">SERVIDOR GPU</text>
+                <text x="32" y="68" fill="#ffffff" font-size="12" font-weight="bold">R$ 45.000</text>
+                <line x1="25" y1="25" x2="135" y2="95" stroke="#ef4444" stroke-width="3"/>
+
+                <!-- Card ESP32 / Mini Placa -->
+                <rect x="155" y="20" width="125" height="80" rx="8" fill="#0d2821" stroke="#10b981" stroke-width="2"/>
+                <text x="167" y="45" fill="#10b981" font-size="10" font-weight="bold">NOSSO MODELO</text>
+                <text x="167" y="68" fill="#ffffff" font-size="12" font-weight="bold">20 KB (INT8)</text>
+                <text x="167" y="86" fill="#a7f3d0" font-size="9">Cabe num ESP32!</text>
+
+                <!-- QR Code Stand -->
+                <rect x="65" y="115" width="170" height="75" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
+                <text x="85" y="142" fill="#06b6d4" font-size="11" font-weight="bold">📱 QR CODE GITHUB PAGES</text>
+                <text x="82" y="165" fill="#cbd5e1" font-size="9">Acesse os Slides e a PoC</text>
+              </svg>
+
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px;">
+                Coloque as etiquetas impressas abaixo na frente da mesa para quem passar no corredor ler de longe.
+              </p>
+            </div>
+            <div class="price-sticker red">❌ Concorrente: R$ 45.000 vs ✅ Nós: R$ 55</div>
+          </div>
+
+        </div>
+
+        <div class="visitor-bar">
+          🚶‍♂️ CORREDOR DOS VISITANTES E AVALIADORES DA FEIRA (Eles veem as etiquetas grandes primeiro!) 🚶‍♀️
+        </div>
+      </div>
+
+      <!-- =================================================================
+           SEÇÃO 2: COMO FAZER O SUPORTE DE CANO PVC DE R$ 15 (SEM COLA/SEM FURO)
+           ================================================================= -->
+      <h2>2. Como Montar o Suporte Industrial de Cano PVC (Custo: R$ 15 em 10 Minutos)</h2>
+      <div class="blueprint-grid">
+        <div class="card">
+          <h3 style="margin-bottom: 10px; color: var(--accent);">Desenho Técnico com Medidas (Cano PVC Marrom/Branco de 25mm)</h3>
+          <svg viewBox="0 0 500 310" style="width: 100%; background: #0b0f17; border-radius: 14px; border: 1px solid #263348;">
+            <!-- Mesa -->
+            <line x1="30" y1="265" x2="470" y2="265" stroke="#475569" stroke-width="6"/>
+            <text x="40" y="290" fill="#94a3b8" font-size="12">SUPERFÍCIE DA MESA DA FEIRA</text>
+
+            <!-- Base Horizontal no Chao da Mesa -->
+            <rect x="110" y="247" width="240" height="18" rx="4" fill="#64748b" stroke="#94a3b8" stroke-width="2"/>
+            <text x="175" y="240" fill="#cbd5e1" font-size="11" font-weight="bold">Base de apoio: 25 cm</text>
+
+            <!-- Coluna Vertical (35 cm) -->
+            <rect x="332" y="55" width="18" height="210" rx="4" fill="#64748b" stroke="#94a3b8" stroke-width="2"/>
+            <text x="360" y="165" fill="#06b6d4" font-size="12" font-weight="bold">↕ Altura: 35 cm</text>
+
+            <!-- Joelho 90 graus superior -->
+            <rect x="328" y="48" width="26" height="26" rx="6" fill="#475569" stroke="#cbd5e1" stroke-width="2"/>
+
+            <!-- Braco Superior Horizontal (22 cm) -->
+            <rect x="170" y="52" width="165" height="18" rx="4" fill="#64748b" stroke="#94a3b8" stroke-width="2"/>
+            <text x="200" y="42" fill="#06b6d4" font-size="12" font-weight="bold">↔ Braço: 22 cm</text>
+
+            <!-- Webcam + LED presos na ponta -->
+            <rect x="155" y="68" width="55" height="28" rx="6" fill="#10b981"/>
+            <text x="160" y="86" fill="#042f1e" font-size="10" font-weight="bold">WEBCAM</text>
+
+            <!-- Feixe de Visao + Luz LED -->
+            <polygon points="182,96 115,245 250,245" fill="#10b981" opacity="0.14"/>
+            <line x1="182" y1="96" x2="115" y2="245" stroke="#10b981" stroke-dasharray="6,4" stroke-width="2"/>
+            <line x1="182" y1="96" x2="250" y2="245" stroke="#10b981" stroke-dasharray="6,4" stroke-width="2"/>
+            <text x="135" y="185" fill="#a7f3d0" font-size="11" font-weight="bold">Foco da Câmera + Luz LED</text>
+
+            <!-- Peca de Teste embaixo -->
+            <rect x="145" y="232" width="75" height="15" rx="3" fill="#facc15"/>
+            <text x="148" y="225" fill="#facc15" font-size="11" font-weight="bold">PEÇA DE TESTE AQUI</text>
+          </svg>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-bottom: 10px;">Lista de Peças no Depósito (R$ 15,00)</h3>
+          <div class="step-list">
+            <div class="step-item">
+              <strong>1. 1 metro de Cano PVC 25mm (3/4") — R$ 8,00</strong>
+              Peça na loja mesmo para cortar em 3 pedaços: um de <strong>35 cm</strong> (coluna), um de <strong>22 cm</strong> (braço da câmera) e dois de <strong>20 cm</strong> (pés da base).
+            </div>
+            <div class="step-item">
+              <strong>2. 2 Joelhos 90° + 1 "T" de 25mm — R$ 4,00</strong>
+              Encaixe na mão (nem precisa de cola de cano, assim você desmonta para levar na mochila!).
+            </div>
+            <div class="step-item">
+              <strong>3. Pintura Industrial (Dica de Ouro) — R$ 0 a R$ 12</strong>
+              Passe fita isolante preta ou spray preto/cinza. Fica idêntico a um pórtico industrial profissional!
+            </div>
+            <div class="step-item">
+              <strong>4. Prender a Câmera e o LED</strong>
+              Prenda a Webcam USB (ou suporte de celular) e uma mini fita/lanterna LED na ponta superior com uma abraçadeira de nylon ("enforca-gato") apontando reto para a mesa.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================
+         SEÇÃO 3: FOLHA DE ETIQUETAS PRONTAS PARA IMPRIMIR (A4)
+         ================================================================= -->
+    <h2 class="no-print">
+      <span>3. Plaquinhas de Preço Prontas para Imprimir e Colar na Mesa</span>
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimir Estas 4 Plaquinhas Agora (A4)</button>
+    </h2>
+
+    <div class="print-sheet">
+
+      <!-- PLAQUINHA 1 -->
+      <div class="printable-tag">
+        <div class="tag-header">✅ SOLUÇÃO EDGE AI SPECIALIST (NA MESA)</div>
+        <h3>Pórtico Óptico + Câmera + Iluminação LED</h3>
+        <div class="big-price">R$ 55,00</div>
+        <p>• Roda em qualquer PC antigo sem placa de vídeo (CPU)<br>• Modelo de IA comprimido em INT8 com apenas <strong>20 KB</strong><br>• Tempo de resposta: <strong>3,15 ms (317 FPS)</strong></p>
+      </div>
+
+      <!-- PLAQUINHA 2 -->
+      <div class="printable-tag danger-tag">
+        <div class="tag-header">❌ VISÃO COMPUTACIONAL TRADICIONAL</div>
+        <h3>Servidor Industrial + Placa GPU + Nuvem</h3>
+        <div class="big-price">R$ 45.000,00</div>
+        <p>• Exige placa de vídeo dedicada cara e alto consumo<br>• Para de funcionar se a internet do galpão cair<br>• 80% dos projetos travam no custo (RAND Corp, 2024)</p>
+      </div>
+
+      <!-- PLAQUINHA 3 -->
+      <div class="printable-tag">
+        <div class="tag-header">✈️ DESAFIO MODO AVIÃO (100% OFFLINE)</div>
+        <h3>Teste Você Mesmo a Nossa IA Agora!</h3>
+        <div class="big-price" style="font-size: 1.65rem;">PASSO 1 ➔ PASSO 2</div>
+        <p>1. Pegue uma <strong>Peça Boa</strong> ou uma <strong>Peça com Defeito</strong> aqui ao lado.<br>2. Coloque debaixo da câmera e veja o acionamento imediato do CLP em 3 milissegundos (Sem Wi-Fi!).</p>
+      </div>
+
+      <!-- PLAQUINHA 4 -->
+      <div class="printable-tag">
+        <div class="tag-header">♻️ RETROFITTING INDUSTRIAL (TIER 3)</div>
+        <h3>Custo de Servidor Dedicado Nesta Bancada:</h3>
+        <div class="big-price">R$ 0,00 (Zero GPU)</div>
+        <p>• Reaproveita computadores legados já descartados pela TI.<br>• Vídeo processado na memória RAM e descartado na hora (Norma IEC 62443).</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
