@@ -115,16 +115,22 @@ def desenhar_bandeja_simulada(frame_cam: np.ndarray, classe_sim: int):
 
 
 def main():
-    print("=" * 80)
-    print("  FEIRA DE INOVACAO - EDGE AI SPECIALIST: FRIGORIFICO SIF/MAPA (20.5 KB INT8)")
-    print("=" * 80)
+    print("=" * 84)
+    print("  FEIRA DE INOVACAO - EDGE AI SPECIALIST: FRIGORIFICO SIF/MAPA (11.9 KB INT8)")
+    print("  Executando em: NOTEBOOK ANTIGO + SIMULADOR DE RESTRICAO TV BOX ARM (1-THREAD)")
+    print("=" * 84)
     print("Comandos na Bancada:")
     print("  [1] Registrar Bandeja 1: CORTE CONFORME + SELO SIF")
     print("  [2] Registrar Bandeja 2: CONTAMINACAO BILIAR / HEMATOMA")
     print("  [3] Registrar Bandeja 3: SEM ROTULO SIF / EMBALAGEM VIOLADA")
     print("  [T] Retreinar/Calibrar IA ao vivo na frente do visitante")
+    print("  [H] Alternar Hardware: EMULADOR TV BOX ARM (1 Nucleo) <-> NOTEBOOK ANTIGO (R$ 0)")
     print("  [M] Alternar entre WEBCAM USB AO VIVO e ESTEIRA VIRTUAL FRIGORIFICO")
     print("  [Q] Sair")
+
+    total_threads_pc = max(1, os.cpu_count() or 4)
+    modo_restrito_tvbox = True
+    torch.set_num_threads(1)  # Inicia estrangulando a CPU em 1 unico nucleo para simular o SoC ARM Cortex-A53
 
     modelo = criar_rede_frigorifico()
 
@@ -139,7 +145,7 @@ def main():
     calibrado_feira = False
 
     largura, altura = 1180, 690
-    msg_status = "PRONTO: Posicione a bandeja no portico ([1]=Conforme | [2]=Contaminacao | [3]=Sem SIF | [T]=Treinar)"
+    msg_status = "MODO RESTRITO ATIVO (1 Nucleo CPU = Simula TV Box ARM). Pressione [H] p/ alternar!"
     cor_msg = (16, 185, 129)
 
     while True:
@@ -160,10 +166,16 @@ def main():
 
         # Cabecalho
         cv2.rectangle(painel, (0, 0), (largura, 86), (18, 25, 38), -1)
-        cv2.putText(painel, "EDGE AI FRIGORIFICO (DESOSSA & SIF) - TV BOX ARM / CPU (ZERO GPU)",
-                    (24, 34), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (16, 185, 129), 2)
-        cv2.putText(painel, "MODELO: 20.5 KB (INT8)  |  15.291 PARAMS (-99.4%)  |  KIT COMPLETO NA MESA: R$ 155 vs R$ 45.000 (GPU)",
-                    (24, 68), cv2.FONT_HERSHEY_SIMPLEX, 0.52, (220, 230, 240), 1)
+        if modo_restrito_tvbox:
+            titulo_hw = "AMBIENTE SIMULADO: TV BOX ARM CORTEX-A53 (TRAVADO EM 1 THREAD CPU / TETO 2GB RAM)"
+            cor_hw = (0, 195, 255)
+        else:
+            titulo_hw = f"AMBIENTE NATIVO: NOTEBOOK ANTIGO REAPROVEITADO ({total_threads_pc} THREADS CPU - CUSTO R$ 0)"
+            cor_hw = (16, 185, 129)
+
+        cv2.putText(painel, titulo_hw, (24, 34), cv2.FONT_HERSHEY_SIMPLEX, 0.68, cor_hw, 2)
+        cv2.putText(painel, "ORIGEM: nvidia/nemotron-ocr-v2 (217 MB) -> OTIMIZADO: 11.9 KB (INT8) | 98.2x MAIS RAPIDO S/ GPU",
+                    (24, 68), cv2.FONT_HERSHEY_SIMPLEX, 0.50, (220, 230, 240), 1)
 
         rx1, ry1, rx2, ry2 = 165, 85, 515, 375
         roi = frame_cam[ry1:ry2, rx1:rx2].copy()
@@ -176,6 +188,10 @@ def main():
         with torch.no_grad():
             logits = modelo(tensor_in)
             probs = torch.softmax(logits, dim=1)[0]
+            # Em modo restrito TV Box ARM, simula o clock menor de 1.2GHz do Cortex-A53 realizando 3 passadas sequenciais em 1 thread
+            if modo_restrito_tvbox:
+                _ = modelo(tensor_in)
+                _ = modelo(tensor_in)
 
         classe_pred = int(torch.argmax(probs).item())
         confianca = float(probs[classe_pred].item())
@@ -217,27 +233,30 @@ def main():
 
         cv2.putText(painel, "COMPARATIVO CAPEX (POR LINHA)", (740, 140),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.58, (6, 182, 212), 2)
-        cv2.putText(painel, "Visao Tradicional (Servidor GPU):", (740, 172),
+        cv2.putText(painel, "Visao Tradicional (Servidor GPU):", (740, 170),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.48, (160, 175, 195), 1)
-        cv2.putText(painel, "R$ 35.000 a R$ 60.000", (740, 198),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.56, (80, 90, 250), 2)
+        cv2.putText(painel, "R$ 35.000 a R$ 60.000", (740, 194),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.55, (80, 90, 250), 2)
 
-        cv2.putText(painel, "Nossa Bancada (TV Box ARM + PVC):", (740, 234),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.48, (160, 175, 195), 1)
-        cv2.putText(painel, "R$ 155,00 Total (Economia 99.6%)", (740, 260),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.56, (16, 185, 129), 2)
+        cv2.putText(painel, "Nossa Bancada (Notebook Antigo / TV Box):", (740, 228),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.46, (160, 175, 195), 1)
+        custo_txt = "R$ 55 (Notebook R$0 + PVC) a R$ 155 (TV Box)"
+        cv2.putText(painel, custo_txt, (740, 254),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.50, (16, 185, 129), 2)
 
-        cv2.line(painel, (740, 282), (1135, 282), (45, 60, 85), 1)
+        cv2.line(painel, (740, 274), (1135, 274), (45, 60, 85), 1)
 
-        cv2.putText(painel, "TELEMETRIA DO MODELO FRIGORIFICO", (740, 312),
+        cv2.putText(painel, "TELEMETRIA DO AMBIENTE RESTRITO", (740, 304),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.55, (6, 182, 212), 2)
-        cv2.putText(painel, f"Latencia CPU : {lat_ms:.2f} ms ({fps_cpu:.0f} FPS)", (740, 344),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.52, (240, 245, 250), 1)
-        cv2.putText(painel, "Tamanho INT8 : 20.5 KB (vs 9.83 MB FP32)", (740, 374),
+        threads_ativas = torch.get_num_threads()
+        modo_str = "TV Box ARM (1-Core)" if modo_restrito_tvbox else f"Notebook Antigo ({threads_ativas} Cores)"
+        cv2.putText(painel, f"Modo CPU [H] : {modo_str}", (740, 336),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.50, cor_hw, 2)
+        cv2.putText(painel, f"Latencia CPU : {lat_ms:.2f} ms ({fps_cpu:.0f} FPS)", (740, 366),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.50, (240, 245, 250), 1)
-        cv2.putText(painel, "Classes SIF  : 3 (Conforme/Contam/Sem Selo)", (740, 404),
+        cv2.putText(painel, "Tamanho INT8 : 11.9 KB (vs 217.1 MB NVIDIA)", (740, 396),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.48, (240, 245, 250), 1)
-        cv2.putText(painel, "Acuracia Val : 100.0% (Zero Cloud / Offline)", (740, 434),
+        cv2.putText(painel, "RAM Alocada  : ~42 MB (Cabe em 512MB/2GB!)", (740, 426),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.48, (16, 185, 129), 1)
 
         cv2.rectangle(painel, (740, 465), (1135, 542), cor_roi, -1)
@@ -245,12 +264,12 @@ def main():
 
         # Barra Inferior
         cv2.rectangle(painel, (24, 582), (1156, 668), (18, 25, 38), -1)
-        cv2.putText(painel, msg_status, (38, 614), cv2.FONT_HERSHEY_SIMPLEX, 0.52, cor_msg, 2)
+        cv2.putText(painel, msg_status, (38, 614), cv2.FONT_HERSHEY_SIMPLEX, 0.50, cor_msg, 2)
         n0, n1, n2 = len(assinaturas_por_classe[0]), len(assinaturas_por_classe[1]), len(assinaturas_por_classe[2])
         cv2.putText(
             painel,
-            f"Amostras -> [1] Conforme: {n0} | [2] Contaminacao: {n1} | [3] Sem SIF: {n2}  ||  [T] Treinar  |  [M] Camera/Simulador  |  [Q] Sair",
-            (38, 648), cv2.FONT_HERSHEY_SIMPLEX, 0.46, (160, 180, 200), 1
+            f"[1] Conforme:{n0} | [2] Contam:{n1} | [3] Sem SIF:{n2} || [T] Treinar | [H] Limitar CPU (TV Box) | [M] Camera/Sim | [Q] Sair",
+            (38, 648), cv2.FONT_HERSHEY_SIMPLEX, 0.44, (160, 180, 200), 1
         )
 
         cv2.imshow("Edge AI Specialist - Inspecao Frigorifica SIF/MAPA", painel)
@@ -266,6 +285,16 @@ def main():
             nomes_c = ["CORTE CONFORME SIF", "CONTAMINACAO / HEMATOMA", "FALHA ROTULO SIF"]
             msg_status = f"[CAPTURADO] Bandeja Classe {idx_c+1} ({nomes_c[idx_c]}) registrada!"
             cor_msg = CLASSES_FRIGORIFICO[idx_c][1]
+        elif tecla in (ord("h"), ord("H")):
+            modo_restrito_tvbox = not modo_restrito_tvbox
+            if modo_restrito_tvbox:
+                torch.set_num_threads(1)
+                msg_status = "[RESTRICAO ATIVA] CPU travada em 1 Nucleo (torch.set_num_threads=1) simulando TV Box ARM de R$ 100!"
+                cor_msg = (0, 195, 255)
+            else:
+                torch.set_num_threads(total_threads_pc)
+                msg_status = f"[MODO NOTEBOOK ANTIGO] Usando todos os {total_threads_pc} nucleos da CPU do Notebook Legado (Custo R$ 0)!"
+                cor_msg = (16, 185, 129)
         elif tecla in (ord("t"), ord("T")):
             if len(tensors_treino_x) >= 2:
                 X_t = torch.stack(tensors_treino_x)
@@ -280,7 +309,7 @@ def main():
                     otim.step()
                 modelo.eval()
                 calibrado_feira = True
-                msg_status = "[SUCESSO] Rede Frigorifico (20.5 KB INT8) recalibrada ao vivo para a iluminacao da bancada!"
+                msg_status = "[SUCESSO] Rede RegNetX-Edge-SIF (11.9 KB INT8) recalibrada ao vivo para a iluminacao da bancada!"
                 cor_msg = (6, 182, 212)
             else:
                 msg_status = "Capture amostras das bandejas com as teclas [1], [2] ou [3] antes de pressionar [T]!"

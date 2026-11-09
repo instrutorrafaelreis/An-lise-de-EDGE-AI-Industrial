@@ -1,0 +1,37 @@
+==============================================================================
+  GUIA RAPIDO: COMO ESPETAR E RODAR NA TV BOX SMART PRO 4K (OU NOTEBOOK)
+==============================================================================
+
+PASSO 1: COPIAR PARA O PENDRIVE
+-------------------------------
+Copie todos os arquivos de dentro desta pasta (PENDRIVE_TVBOX_PRONTO) direto
+para a raiz de um Pendrive USB comum (formatado em FAT32 ou exFAT).
+
+PASSO 2: LIGAR OS CABOS NA TV BOX SMART PRO 4K
+----------------------------------------------
+1. Ligue o cabo HDMI da TV Box no Monitor ou TV da bancada.
+2. Porta USB 1 da TV Box -> Espete o PENDRIVE.
+3. Porta USB 2 da TV Box -> Espete a WEBCAM USB (presa no arco de PVC).
+4. Porta USB 3 da TV Box -> Espete um MOUSE USB (ou use o Controle Remoto).
+5. Porta USB 4 da TV Box -> Espete a Luz LED USB (iluminando a bandeja).
+
+PASSO 3: ABRIR O SISTEMA NA TV BOX (SEM PRECISAR DE INTERNET!)
+--------------------------------------------------------------
+OPCAO A (Direto pelo Gerenciador de Arquivos da TV Box - Mais Facil):
+  1. Na tela inicial da TV Box, abra o app "File Manager" (Explorador de Arquivos).
+  2. Clique no seu Pendrive USB.
+  3. Clique no arquivo:  ABRIR_NA_TVBOX.html
+  4. Escolha abrir com o navegador "Chrome" ou "Browser".
+  5. Aperte o botao "Tela Cheia [F]" no canto superior direito!
+
+OPCAO B (Se tiver um Teclado/Mouse ou Controle Remoto na TV Box):
+  - Botao [1] ou clique verde   -> Lanca/Calibra Bandeja 1 (CORTE CONFORME SIF - Bipe Verde)
+  - Botao [2] ou clique vermelho-> Lanca/Calibra Bandeja 2 (CONTAMINACAO - Sirene Vermelha)
+  - Botao [3] ou clique amarelo -> Lanca/Calibra Bandeja 3 (SEM SELO SIF - Alerta Amarelo)
+  - Botao [0] ou clique azul    -> Ciclo Automatico da Esteira Frigorifica
+  - Botao [M]                   -> Ativa a Webcam USB ao vivo
+  - Botao [H]                   -> Alterna entre Modo TV Box ARM (R$ 100) e Notebook (R$ 0)
+
+OPCAO C (Se for rodar no Notebook Antigo Windows):
+  - Basta dar 2 cliques em:  INICIAR_NO_WINDOWS.bat  ou  ABRIR_NA_TVBOX.html
+==============================================================================

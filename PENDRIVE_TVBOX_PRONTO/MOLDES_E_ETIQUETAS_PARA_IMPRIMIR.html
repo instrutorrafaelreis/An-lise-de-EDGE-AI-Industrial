@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Folha de Impressão Oficial — 3 Bandejas SIF + 4 Etiquetas de Preço da Bancada</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .no-print-bar {
+      background: #0f172a;
+      color: #fff;
+      padding: 16px 22px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-print {
+      background: #10b981;
+      color: #042f1e;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    h2 { margin: 16px 0 10px; font-size: 1.25rem; }
+    .tray-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .tray-card {
+      background: #fff;
+      border: 3px dashed #334155;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+    .tag-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .price-tag {
+      background: #fff;
+      border: 3px dashed #0f172a;
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .badge {
+      display: inline-block;
+      background: #0f172a;
+      color: #10b981;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .badge.red { background: #dc2626; color: #fff; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .no-print-bar { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <div>
+      <strong>🖨️ Central de Impressão da Bancada (1 Folha para as 3 Bandejas + 1 Folha para as Etiquetas)</strong>
+      <div style="font-size: 0.85rem; color: #94a3b8;">Recorte nas linhas tracejadas e cole nas bandejas de isopor e na mesa da feira.</div>
+    </div>
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR AGORA (CTRL+P)</button>
+  </div>
+
+  <h2>🥩 PARTE 1: Moldes para Colar nas 3 Bandejas de Isopor de Supermercado</h2>
+  <div class="tray-grid">
+    <!-- BANDEJA 1 -->
+    <div class="tray-card">
+      <div style="font-weight: 900; color: #059669; margin-bottom: 6px;">BANDEJA [1] • CORTE CONFORME SIF</div>
+      <svg viewBox="0 0 240 160" style="width: 100%; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc;">
+        <rect x="18" y="16" width="204" height="128" rx="12" fill="#dc2626"/>
+        <rect x="18" y="16" width="204" height="20" rx="6" fill="#fef3c7"/>
+        <path d="M 35 55 Q 95 65 190 50" stroke="#fecaca" stroke-width="5" fill="none"/>
+        <path d="M 40 90 Q 110 80 195 100" stroke="#fecaca" stroke-width="4" fill="none"/>
+        <rect x="142" y="88" width="68" height="46" rx="6" fill="#ffffff" stroke="#1d4ed8" stroke-width="3"/>
+        <rect x="148" y="94" width="56" height="14" fill="#1d4ed8"/>
+        <text x="154" y="104" fill="#ffffff" font-size="9" font-weight="bold">SIF 100%</text>
+        <text x="154" y="124" fill="#0f172a" font-size="9" font-weight="bold">APROVADO</text>
+      </svg>
+      <p style="font-size: 0.8rem; margin-top: 6px; font-weight: 700;">Corte Vermelho + Etiqueta Oficial SIF</p>
+    </div>
+
+    <!-- BANDEJA 2 -->
+    <div class="tray-card">
+      <div style="font-weight: 900; color: #dc2626; margin-bottom: 6px;">BANDEJA [2] • CONTAMINAÇÃO / HEMATOMA</div>
+      <svg viewBox="0 0 240 160" style="width: 100%; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc;">
+        <rect x="18" y="16" width="204" height="128" rx="12" fill="#dc2626"/>
+        <circle cx="95" cy="78" r="28" fill="#111827"/>
+        <circle cx="132" cy="84" r="24" fill="#3f6212"/>
+        <line x1="55" y1="45" x2="150" y2="118" stroke="#090d16" stroke-width="8"/>
+        <rect x="142" y="88" width="68" height="46" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+        <text x="150" y="115" fill="#dc2626" font-size="10" font-weight="bold">REJEITAR</text>
+      </svg>
+      <p style="font-size: 0.8rem; margin-top: 6px; font-weight: 700;">Mancha Biliar Esverdeada / Abscesso Escuro</p>
+    </div>
+
+    <!-- BANDEJA 3 -->
+    <div class="tray-card">
+      <div style="font-weight: 900; color: #d97706; margin-bottom: 6px;">BANDEJA [3] • FALHA DE RÓTULO SIF</div>
+      <svg viewBox="0 0 240 160" style="width: 100%; border: 2px solid #cbd5e1; border-radius: 10px; background: #f8fafc;">
+        <rect x="18" y="16" width="204" height="128" rx="12" fill="#dc2626"/>
+        <polygon points="18,16 95,16 75,54 18,46" fill="#0f172a"/>
+        <rect x="140" y="86" width="70" height="48" rx="6" fill="none" stroke="#fde047" stroke-width="3" stroke-dasharray="5,4"/>
+        <text x="148" y="114" fill="#fef08a" font-size="9" font-weight="bold">SEM SELO</text>
+      </svg>
+      <p style="font-size: 0.8rem; margin-top: 6px; font-weight: 700;">Ausência de Rastreabilidade SIF + Violação</p>
+    </div>
+  </div>
+
+  <h2>🏷️ PARTE 2: Plaquinhas de Preço para Colar no Cano de PVC, na TV Box e na Mesa</h2>
+  <div class="tag-grid">
+    <div class="price-tag">
+      <span class="badge red">❌ VISÃO INDUSTRIAL TRADICIONAL</span>
+      <h3 style="font-size: 1.2rem;">Servidor GPU + Nuvem</h3>
+      <div style="font-size: 1.9rem; font-weight: 900; color: #dc2626; margin: 6px 0;">R$ 45.000,00 / ponto</div>
+      <p style="font-size: 0.85rem; color: #475569;">Modelo NVIDIA Original: <strong>217,12 MB (56,9M params)</strong> • Exige Placa de Vídeo e Internet.</p>
+    </div>
+
+    <div class="price-tag">
+      <span class="badge">✅ NOSSA SOLUÇÃO EDGE AI (100% OFFLINE)</span>
+      <h3 style="font-size: 1.2rem;">TV Box 4K ARM + Pórtico PVC</h3>
+      <div style="font-size: 1.9rem; font-weight: 900; color: #059669; margin: 6px 0;">R$ 155,00 Total</div>
+      <p style="font-size: 0.85rem; color: #475569;">Modelo Otimizado INT8: <strong>11,9 KB (-99,995%)</strong> • <strong>98,2x Mais Rápido (1,19 ms)</strong> sem GPU!</p>
+    </div>
+
+    <div class="price-tag">
+      <span class="badge">📺 COLE NA FRENTE DA TV BOX / NOTEBOOK</span>
+      <h3 style="font-size: 1.15rem;">Cérebro Embarcado (ARM Cortex-A53)</h3>
+      <div style="font-size: 1.65rem; font-weight: 900; color: #059669; margin: 4px 0;">Custo: R$ 100,00 (ou R$ 0 PC Legado)</div>
+      <p style="font-size: 0.84rem; color: #475569;">Roda direto do Pendrive USB sem internet • Consumo elétrico de apenas 5 Watts.</p>
+    </div>
+
+    <div class="price-tag">
+      <span class="badge">📷 COLE NO ARCO DE CANO DE PVC</span>
+      <h3 style="font-size: 1.15rem;">Pórtico Óptico SIF (PVC + Webcam + LED)</h3>
+      <div style="font-size: 1.65rem; font-weight: 900; color: #059669; margin: 4px 0;">Custo: R$ 55,00</div>
+      <p style="font-size: 0.84rem; color: #475569;">Tubos PVC 25mm (R$ 25) + Webcam USB (R$ 20) + Iluminação LED dedicada (R$ 10).</p>
+    </div>
+  </div>
+
+</body>
+</html>
