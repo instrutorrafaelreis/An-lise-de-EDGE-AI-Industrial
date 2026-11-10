@@ -1,33 +1,78 @@
 {
   "Dominio_Industrial": "Frigorifico - Inspecao Sanitaria SIF/MAPA e Embalagem",
+  "Pipeline_Engenharia_Aplicado": [
+    "1. Knowledge Distillation (Professor RegNetX-8GF -> Aluno RegNetX-Edge-SIF)",
+    "2. Algebraic Operator Fusion (5 camadas BatchNorm2d absorvidas nas Conv2d)",
+    "3. L1 Unstructured Magnitude Pruning (35% Sparsity)",
+    "4. Symmetric Per-Channel INT8 Quantization-Aware Fine-Tuning (QAT [-127, +127])",
+    "5. TorchScript Graph Freezing & Inference Optimization (torch.jit.freeze)"
+  ],
   "Modelo_Origem_NVIDIA_Build": {
     "Nome": "nvidia/nemotron-ocr-v2",
     "URL_Oficial": "https://build.nvidia.com/nvidia/nemotron-ocr-v2",
-    "Arquitetura": "RegNetX-8GF Backbone + Transformer Recognizer + Relational Head (FP32)",
-    "Hardware_Exigido_NVIDIA": "NVIDIA H100 / A100 / B200 / L40S (Servidor GPU)",
+    "Arquitetura": "RegNetX-8GF Backbone + Recognizer/Relational Head (FP32)",
     "Parametros": 56916232,
     "Tamanho_MB": 217.12,
-    "Latencia_CPU_ms": 116.77,
-    "FPS_CPU": 8.6
+    "FLOPs_Por_Imagem": 16024936832,
+    "GFLOPs_Por_Imagem": 16.025,
+    "Latencia_Notebook_MultiCore_ms": 154.03,
+    "Latencia_Simulador_TVBox_1Core_ms": 228.72,
+    "FPS_Simulador_TVBox_1Core": 4.4
   },
   "Modelo_Especialista_Otimizado_Edge_INT8": {
-    "Arquitetura": "RegNetX-Edge-SIF (Stem+Block1 + Destilacao + 30% Pruning + INT8)",
-    "Hardware_Alvo": "TV Box Smart Pro 4K (ARM Cortex-A53 Quad-Core, R$ 100) / PC Legado CPU",
-    "Parametros": 9731,
-    "Tamanho_MB": 0.0116,
-    "Tamanho_KB": 11.9,
-    "Latencia_CPU_ms": 1.19,
-    "FPS_CPU": 840.7,
-    "Acuracia_Validacao_Total_Pct": 100.0,
-    "Acuracia_Por_Classe_Pct": {
-      "0_CORTE_CONFORME_SIF": 100.0,
-      "1_CONTAMINACAO_HEMATOMA": 100.0,
-      "2_FALHA_ROTULO_EMBALAGEM": 100.0
+    "Arquitetura": "RegNetX-Edge-SIF Fused INT8 (Zero BatchNorm Overhead)",
+    "Parametros": 9571,
+    "Camadas_BatchNorm_Eliminadas": 5,
+    "Tamanho_KB": 11.2,
+    "Tamanho_MB": 0.0109,
+    "FLOPs_Por_Imagem": 89114256,
+    "MFLOPs_Por_Imagem": 89.11,
+    "Latencia_Notebook_MultiCore_ms": 1.35,
+    "FPS_Notebook_MultiCore": 742.1,
+    "Latencia_Simulador_TVBox_1Core_ms": 2.55,
+    "FPS_Simulador_TVBox_1Core": 392.8,
+    "Acuracia_Validacao_Pct": 100.0,
+    "F1_Score_Macro_Pct": 100.0,
+    "Matriz_Confusao_3x3": [
+      [
+        46,
+        0,
+        0
+      ],
+      [
+        0,
+        51,
+        0
+      ],
+      [
+        0,
+        0,
+        38
+      ]
+    ],
+    "Metricas_Por_Classe": {
+      "0_CORTE_CONFORME_SIF": {
+        "Precision_Pct": 100.0,
+        "Recall_Pct": 100.0,
+        "F1_Score_Pct": 100.0
+      },
+      "1_CONTAMINACAO_HEMATOMA": {
+        "Precision_Pct": 100.0,
+        "Recall_Pct": 100.0,
+        "F1_Score_Pct": 100.0
+      },
+      "2_FALHA_ROTULO_EMBALAGEM": {
+        "Precision_Pct": 100.0,
+        "Recall_Pct": 100.0,
+        "F1_Score_Pct": 100.0
+      }
     }
   },
-  "Ganhos_Reais_Otimizacao": {
+  "Ganhos_Reais_Auditaveis": {
     "Reducao_Parametros_Pct": 99.983,
     "Reducao_Tamanho_Disco_Pct": 99.995,
-    "Aceleracao_Velocidade_CPU": "98.2x mais rapido"
+    "Reducao_Operacoes_FLOPs_Pct": 99.444,
+    "Aceleracao_Notebook_MultiCore": "114.3x mais rapido",
+    "Aceleracao_TVBox_1Core": "89.8x mais rapido"
   }
 }
