@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Passo a Passo de Execução — Edge AI Specialist (Frigorífico SIF/MAPA)</title>
+  <style>
+    :root {
+      --bg: #080c14;
+      --card: #111827;
+      --card-alt: #1e293b;
+      --accent: #10b981;
+      --accent-cyan: #06b6d4;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--accent);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 900;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid var(--accent);
+      color: #34d399;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: var(--card-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-link.primary {
+      background: var(--accent);
+      color: #042f1e;
+      border-color: var(--accent);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 28px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #0d1f1a 100%);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 900px;
+    }
+
+    .quick-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 860px) {
+      .quick-cards, .grid-2, .key-grid { grid-template-columns: 1fr !important; }
+    }
+
+    .q-card {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .q-card.cyan { border-left-color: var(--accent-cyan); }
+    .q-card.yellow { border-left-color: var(--warning); }
+
+    .q-card h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .q-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    /* SEÇÕES DE PASSO A PASSO */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 34px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .step-number {
+      background: var(--accent);
+      color: #042f1e;
+      font-weight: 900;
+      font-size: 1.1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .step-card h3 {
+      font-size: 1.18rem;
+      color: #34d399;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .code-box {
+      background: #05080f;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      position: relative;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #a7f3d0;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent);
+      color: #042f1e;
+      border-color: var(--accent);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* TABELA DE TECLAS INTERATIVAS */
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .key-item {
+      background: #0b111d;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .kbd-big {
+      background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+      color: #38bdf8;
+      border: 2px solid #475569;
+      border-bottom-width: 4px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: 900;
+      min-width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .kbd-big.green { color: #34d399; border-color: var(--accent); }
+    .kbd-big.red { color: #f87171; border-color: var(--danger); }
+    .kbd-big.yellow { color: #fbbf24; border-color: var(--warning); }
+
+    .check-list {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .check-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .check-list input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .alert-tip {
+      background: rgba(6, 182, 212, 0.12);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: #cffafe;
+    }
+
+    @media print {
+      .topbar, .copy-btn { display: none !important; }
+      body { background: #fff; color: #000; }
+      .hero, .step-card, .q-card, .key-item { background: #fff; border: 1px solid #ccc; color: #000; box-shadow: none; }
+      .code-box { background: #f1f5f9; color: #0f172a; border: 1px solid #94a3b8; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGAÇÃO -->
+  <header class="topbar">
+    <div class="brand">
+      <span>🧭 GUIA PASSO A PASSO DE EXECUÇÃO</span>
+      <span class="badge">Edge AI Frigorífico SIF • 11,2 KB INT8</span>
+    </div>
+    <div class="nav-links">
+      <a href="PENDRIVE_TVBOX_PRONTO/ABRIR_NA_TVBOX.html" class="btn-link primary">📺 Abrir App da TV Box</a>
+      <a href="PENDRIVE_TVBOX_PRONTO/MOLDES_E_ETIQUETAS_PARA_IMPRIMIR.html" class="btn-link">🖨️ Imprimir Bandejas & Etiquetas</a>
+      <a href="index.html" class="btn-link">📊 Abrir Slides & Cronograma</a>
+      <button class="btn-link" onclick="window.print()">🖨️ Imprimir Guia</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <span class="badge" style="margin-bottom: 10px; display: inline-block;">Manual Operacional Completo • Notebook & TV Box 4K</span>
+      <h1>Como Executar e Demonstrar o Projeto Passo a Passo</h1>
+      <p>
+        Este guia mostra exatamente como rodar as <strong>3 formas de execução</strong> do sistema (no <strong>Notebook simulando o hardware da TV Box de 1 núcleo</strong>, direto no <strong>Navegador / Pendrive da TV Box 4K</strong> e o <strong>Roteiro de Demonstração na Feira</strong>).
+      </p>
+
+      <div class="quick-cards">
+        <div class="q-card">
+          <h3>💻 Opção 1: Estação SCADA + XAI no Notebook</h3>
+          <p>Trava o Windows em <strong>1 núcleo físico (Core 0)</strong> para simular a TV Box, mostra <strong>Mapa de Calor Grad-CAM [G]</strong>, Osciloscópio e gera Laudo CSV <strong>[R]</strong>.</p>
+        </div>
+        <div class="q-card cyan">
+          <h3>📺 Opção 2: WebApp Offline (TV Box / Navegador)</h3>
+          <p>Zero instalação! Basta abrir o arquivo <code>ABRIR_NA_TVBOX.html</code> direto do Pendrive USB na TV Box 4K ou em qualquer computador.</p>
+        </div>
+        <div class="q-card yellow">
+          <h3>🧠 Opção 3: Pipeline de Otimização (5 Estágios)</h3>
+          <p>Executa ao vivo a compressão do modelo NVIDIA (<code>217,12 MB</code> ➔ <code>11,2 KB INT8</code> com Fusão <code>Conv+BN</code> e <code>QAT</code>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         PASSO 1: RODAR NO NOTEBOOK SIMULANDO A TV BOX (ESTAÇÃO SCADA + XAI)
+         ======================================================================= -->
+    <div class="section-header">
+      <div class="step-number">1</div>
+      <div>
+        <h2>Execução Principal: Estação SCADA + Emulador de TV Box no Notebook</h2>
+        <p style="color: var(--muted); font-size: 0.9rem;">Recomendado para mostrar aos avaliadores o Mapa de Calor Neural (Grad-CAM), o Osciloscópio de Latência e a trava de 1 Núcleo Físico.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="step-card">
+        <h3>⚡ Jeito Mais Rápido (Com 2 Cliques no Windows)</h3>
+        <p style="color: var(--muted); font-size: 0.92rem;">
+          Na pasta do projeto (ou dentro da pasta <code>PENDRIVE_TVBOX_PRONTO</code>), basta dar <strong>2 cliques</strong> no arquivo abaixo:
+        </p>
+        <div class="code-box">
+          RODAR_SIMULADOR_TVBOX_NO_NOTEBOOK.bat
+        </div>
+        <p style="font-size: 0.9rem; color: #cbd5e1;">
+          Ele já ativa automaticamente a trava de <strong>1 núcleo físico da CPU (Core 0 / Afinidade 0x01)</strong>, monitora o teto de <strong>2048 MB de RAM</strong> da TV Box e abre a câmera ou a esteira virtual!
+        </p>
+      </div>
+
+      <div class="step-card">
+        <h3>💻 Pelo Terminal PowerShell / CMD (Passo a Passo)</h3>
+        <p style="color: var(--muted); font-size: 0.92rem;">
+          Se estiver em um computador novo ou quiser rodar via linha de comando, copie e cole no PowerShell:
+        </p>
+        <div class="code-box" id="cmd1">
+          <button class="copy-btn" onclick="copyCode('cmd1', this)">📋 Copiar</button>
+cd C:\Users\rafael.filipe\Documents\EDIGE_AI<br>
+python simular_ambiente_tvbox.py
+        </div>
+        <div class="alert-tip">
+          💡 <strong>Primeira vez em outro PC?</strong> Rode antes: <code>pip install -r requirements.txt</code> para instalar PyTorch e OpenCV.
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL DE COMANDOS DE TECLADO DA ESTAÇÃO SCADA -->
+    <div class="step-card">
+      <h3>🎹 Mapa de Teclas Interativas (O que apertar na frente dos Juízes da Feira)</h3>
+      <p style="color: var(--muted); font-size: 0.92rem;">
+        Com a janela da <strong>Estação SCADA & XAI</strong> aberta na tela, use estas teclas do teclado para demonstrar cada recurso:
+      </p>
+
+      <div class="key-grid">
+        <div class="key-item">
+          <div class="kbd-big green">1</div>
+          <div>
+            <strong>Bandeja 1: Corte Conforme SIF</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Aprova o lote (Sinal Verde no CLP + Bipe de confirmação de 950 Hz).</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big red">2</div>
+          <div>
+            <strong>Bandeja 2: Contaminação / Hematoma</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Aciona Pistão de Rejeite Sanitário (Alerta Vermelho + Sirene de 310 Hz).</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big yellow">3</div>
+          <div>
+            <strong>Bandeja 3: Sem Rótulo SIF</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Desvia bandeja para Re-rotulagem SIF sem jogar a carne boa no lixo!</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big">G</div>
+          <div>
+            <strong>🔥 Mapa de Calor Grad-CAM (XAI)</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Projeta sobre a carne onde os neurônios da IA focaram (mancha ou selo SIF)!</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big">H</div>
+          <div>
+            <strong>⚙️ Alternar Hardware (TV Box ⇄ PC)</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Trava a CPU em <strong>1 núcleo físico (Core 0)</strong> simulando a TV Box ou libera todos os núcleos.</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big">B</div>
+          <div>
+            <strong>🚀 Benchmark NVIDIA vs. Nosso INT8</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Compara ao vivo o modelo NVIDIA (<code>217 MB</code>) contra o nosso (<code>11,2 KB</code> — 98x mais rápido).</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big">R</div>
+          <div>
+            <strong>🧾 Exportar Laudo Oficial SIF (CSV)</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Gera na hora o arquivo <code>auditoria_lote_sif.csv</code> com todas as bandejas inspecionadas.</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big">M</div>
+          <div>
+            <strong>📷 Alternar Webcam USB ⇄ Esteira</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Alterna entre a imagem real da Webcam no pórtico de PVC e a Esteira Virtual.</p>
+          </div>
+        </div>
+
+        <div class="key-item">
+          <div class="kbd-big">T</div>
+          <div>
+            <strong>🎯 Calibrar IA Ao Vivo na Webcam</strong>
+            <p style="font-size: 0.83rem; color: var(--muted);">Após capturar amostras na câmera com <code>[1]</code>, <code>[2]</code> e <code>[3]</code>, aperte <code>[T]</code> para treinar em 1s!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         PASSO 2: RODAR DIRETO DO PENDRIVE NA TV BOX 4K OU NAVEGADOR (ZERO INSTALAÇÃO)
+         ======================================================================= -->
+    <div class="section-header">
+      <div class="step-number">2</div>
+      <div>
+        <h2>Execução via Navegador / Pendrive USB (Sem Precisar Instalar Python)</h2>
+        <p style="color: var(--muted); font-size: 0.9rem;">Funciona em qualquer TV Box Android 4K, Smart TV, Tablet ou Notebook antigo apenas abrindo o arquivo HTML.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="step-card">
+        <h3>📺 Na TV Box Smart Pro 4K (Via Pendrive USB)</h3>
+        <ol style="margin-left: 18px; color: #cbd5e1; font-size: 0.94rem;">
+          <li style="margin-bottom: 6px;">Copie o conteúdo da pasta <strong><code>PENDRIVE_TVBOX_PRONTO</code></strong> para um Pendrive USB.</li>
+          <li style="margin-bottom: 6px;">Espete o Pendrive e a Webcam USB nas portas USB da TV Box.</li>
+          <li style="margin-bottom: 6px;">Abra o app <strong>File Manager</strong> da TV Box e clique em <strong><code>ABRIR_NA_TVBOX.html</code></strong>.</li>
+          <li style="margin-bottom: 6px;">Use o <strong>Controle Remoto da TV Box</strong> ou Mouse USB para clicar nos botões <code>[1]</code>, <code>[2]</code>, <code>[3]</code> ou ativar a câmera!</li>
+        </ol>
+        <div style="margin-top: 14px;">
+          <a href="PENDRIVE_TVBOX_PRONTO/ABRIR_NA_TVBOX.html" class="btn-link primary" style="display: inline-block;">▶️ Abrir Aplicativo Web da TV Box Agora</a>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <h3>🧠 Como Re-Executar o Treinamento e Auditoria Matemática</h3>
+        <p style="color: var(--muted); font-size: 0.92rem;">
+          Se um avaliador pedir para ver como o modelo da NVIDIA (<code>217,12 MB</code> / <code>16,02 GFLOPs</code>) foi transformado no nosso modelo de <code>11,2 KB</code> com Fusão Algébrica <code>Conv+BN</code>:
+        </p>
+        <div class="code-box" id="cmd2">
+          <button class="copy-btn" onclick="copyCode('cmd2', this)">📋 Copiar</button>
+python treinar_modelo_frigorifico.py
+        </div>
+        <p style="font-size: 0.88rem; color: #cbd5e1;">
+          Em ~10 segundos ele executa os 5 estágios matemáticos e gera o relatório auditável <code>modelos_poc/benchmark_frigorifico.json</code>.
+        </p>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         PASSO 3: CHECKLIST INTERATIVO DE PREPARAÇÃO E APRESENTAÇÃO NA FEIRA
+         ======================================================================= -->
+    <div class="section-header">
+      <div class="step-number">3</div>
+      <div>
+        <h2>Checklist Final de Execução na Bancada da Feira</h2>
+        <p style="color: var(--muted); font-size: 0.9rem;">Marque cada etapa abaixo conforme for ligando a bancada no evento:</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <ul class="check-list">
+        <li>
+          <input type="checkbox" />
+          <span><strong>1. Imprimir os Moldes e Etiquetas:</strong> Abrir <a href="PENDRIVE_TVBOX_PRONTO/MOLDES_E_ETIQUETAS_PARA_IMPRIMIR.html" style="color: #38bdf8;">MOLDES_E_ETIQUETAS_PARA_IMPRIMIR.html</a>, imprimir e colar os 3 cortes de carne nas 3 bandejas de isopor e as 4 etiquetas de preço (<code>R$ 155 vs R$ 45.000</code>) na mesa.</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span><strong>2. Montar o Pórtico de PVC (Sem Cola):</strong> Encaixar os canos de 25mm sobre o tapete de EVA preto e prender a Webcam USB + Luz LED apontando 90° para baixo.</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span><strong>3. Abrir a Estação SCADA + Emulador TV Box:</strong> Dar 2 cliques em <code>RODAR_SIMULADOR_TVBOX_NO_NOTEBOOK.bat</code> (ou abrir <code>ABRIR_NA_TVBOX.html</code>).</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span><strong>4. Calibrar a Iluminação do Salão em 15 Segundos:</strong> Com a webcam ativa (tecla <code>[M]</code>), colocar a Bandeja 1 e apertar <code>[1]</code>, colocar a Bandeja 2 e apertar <code>[2]</code>, colocar a Bandeja 3 e apertar <code>[3]</code>, e apertar <code>[T]</code> para gravar a iluminação da feira.</span>
+        </li>
+        <li>
+          <input type="checkbox" />
+          <span><strong>5. Deixar o Mapa de Calor Neural Pronto:</strong> Quando o avaliador se aproximar, apertar <code>[G]</code> para mostrar o <strong>Grad-CAM (Mapa de Calor da IA)</strong> brilhando sobre a mancha de contaminação e apertar <code>[R]</code> para mostrar a planilha <code>auditoria_lote_sif.csv</code> gerada ao vivo!</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    function copyCode(id, btn) {
+      const box = document.getElementById(id);
+      const text = box.innerText.replace('📋 Copiar', '').replace('✅ Copiado!', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✅ Copiado!';
+        setTimeout(() => { btn.textContent = '📋 Copiar'; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
